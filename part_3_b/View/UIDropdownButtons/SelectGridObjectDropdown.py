@@ -16,5 +16,5 @@ class SelectGridObjectDropdown(AbstractUIDropdownButton):
     super().ClickButton(mouseX, mouseY)
 
 
-  def UnclickButton(self, currentGrid, gridSize, currentPastGrids):
+  def UnclickButton(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     return super().UnclickButton(currentGrid, gridSize, bt.SELECT_OBJECT)

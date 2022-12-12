@@ -16,5 +16,5 @@ class SolveAlgorithmDropdown(AbstractUIDropdownButton):
     super().ClickButton(mouseX, mouseY)
 
 
-  def UnclickButton(self, currentGrid, gridSize, currentPastGrids):
+  def UnclickButton(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     return super().UnclickButton(currentGrid, gridSize, bt.PICK_SOLVE_ALG)

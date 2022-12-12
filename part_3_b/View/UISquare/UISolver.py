@@ -20,5 +20,5 @@ class UISolver(AbstractUISquare):
     #print("solver")
     return super().ClickGrid(mouseX, mouseY, gridRow, square, squareSpace, currentGridIndex, currentGridObject, currentGrid, pastGrids)
 
-  def UnclickGrid(self, pastGrids, currentGrid):
-    return super().UnclickGrid(pastGrids, currentGrid)
+  def UnclickGrid(self, pastGrids, currentGrid, currentPastGridsIndex):
+    return super().UnclickGrid(pastGrids, currentGrid, currentPastGridsIndex)

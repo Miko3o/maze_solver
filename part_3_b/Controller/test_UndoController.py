@@ -13,6 +13,7 @@ class Test_UndoController(unittest.TestCase):
     N = "nothing"
     W = "wall"
     pastGridsQuantity = 3
+    currentPastGridsIndex = -1
     currentGrid = [
                   [W, W, W, W, W, N, N, N],
                   [N, N, N, N, N, N, N, N],
@@ -55,7 +56,7 @@ class Test_UndoController(unittest.TestCase):
                                           ]]
 
     #work
-    newGrid = undoController.Undo(currentGrid, 8, currentPastGrids)
+    newGrid = undoController.Undo(currentGrid, 8, currentPastGrids, currentPastGridsIndex)
     print("newGrid:", newGrid)
     #assert
     assert newGrid == currentPastGrids[pastGridsQuantity - 1]

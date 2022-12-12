@@ -69,7 +69,7 @@ class AbstractUIDropdownMenu():
       self.gameWindow.blit(optionsText, (self.displayX + 5, self.displayY + previousTextHeight + + previousTextSpacing + 5))
          
       previousTextHeight += 15
-      previousTextSpacing += 2
+      previousTextSpacing += 4
 
       
 

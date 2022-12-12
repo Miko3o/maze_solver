@@ -42,17 +42,28 @@ class GridObjectController():
       self.currentGrid[newIndexList[0]][newIndexList[1]] = go.NOTHING
       self.goalExists = False
 
-  def UnclickToSavePastGrids(self, pastGrids, currentGrid):
+  def UnclickToSavePastGrids(self, pastGrids, currentGrid, currentPastGridsIndex):
     if self.clicked == True:
+      rangeBetweenPastGridsIndexAndLength = len(pastGrids) - self.ConvertIndexToPositiveNumberHandler(pastGrids, currentPastGridsIndex)
       copyGrid = copy.deepcopy(currentGrid)
       pastGrids.append(copyGrid)
-      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-      for n in range(len(pastGrids)):
-        print("-------------------------------------------------", pastGrids[n])
-      print(len(pastGrids))
-    self.viewManager.modelManager.gridMetaData.ChangeGridData(self.currentGrid, False, pastGrids)
+      
+      print("rangeBetweenPastGridsIndexAndLength:", rangeBetweenPastGridsIndexAndLength)
+      print("pastGrids length:", len(pastGrids))
+      if rangeBetweenPastGridsIndexAndLength != 0:
+        for i in range(rangeBetweenPastGridsIndexAndLength):
+          pastGrids.pop()
+          print("pop")
+      print("pastGrids length:", len(pastGrids))
+      currentPastGridsIndex = -1
+      print("pastGrids index:", currentPastGridsIndex)
+      print("rangeBetweenPastGridsIndexAndLength:", rangeBetweenPastGridsIndexAndLength)
+    self.viewManager.modelManager.gridMetaData.ChangeGridData(self.currentGrid, False, pastGrids, currentPastGridsIndex)
 
-
+  def ConvertIndexToPositiveNumberHandler(self, pastGrids, currentPastGridsIndex):
+    indexItem = pastGrids[currentPastGridsIndex]
+    print("pastGrids index:", pastGrids.index(indexItem) + 1)
+    return pastGrids.index(indexItem) + 1
 
   
   def ChangeGridObject(self):

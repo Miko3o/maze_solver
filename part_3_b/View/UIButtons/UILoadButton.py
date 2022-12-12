@@ -16,6 +16,8 @@ class UILoadButton(AbstractUIButton):
     super().ClickButton(mouseX, mouseY)
     return gs.CREATING_MAZE
 
-  def UnclickButton(self, currentGrid, gridSize, currentPastGrids):
-    self.viewManager.controllerManager.loadMazeController.LoadMaze()
+  def UnclickButton(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
+    if pygame.mouse.get_pressed()[0] == 0 and self.clicked == True:
+      print("unclick grid size:", len(currentGrid))
+      self.viewManager.controllerManager.loadMazeController.LoadMaze()
     return super().UnclickButton()

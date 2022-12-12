@@ -30,11 +30,11 @@ class AbstractUISquare():
     else:
       return
 
-  def UnclickGrid(self, pastGrids, currentGrid):
+  def UnclickGrid(self, pastGrids, currentGrid, currentPastGridsIndex):
     if pygame.mouse.get_pressed()[0] == 0 and self.leftClicked == True and self.rightClicked == False:
       self.leftClicked = False
-      self.uiGrid.viewManager.controllerManager.gridObjectController.UnclickToSavePastGrids(pastGrids, currentGrid)
+      self.uiGrid.viewManager.controllerManager.gridObjectController.UnclickToSavePastGrids(pastGrids, currentGrid, currentPastGridsIndex)
     if pygame.mouse.get_pressed()[2] == 0 and self.rightClicked == True and self.leftClicked == False:
       self.rightClicked = False
-      self.uiGrid.viewManager.controllerManager.gridObjectController.UnclickToSavePastGrids(pastGrids, currentGrid)
+      self.uiGrid.viewManager.controllerManager.gridObjectController.UnclickToSavePastGrids(pastGrids, currentGrid, currentPastGridsIndex)
     

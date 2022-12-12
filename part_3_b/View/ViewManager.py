@@ -50,13 +50,13 @@ class ViewManager():
     
     #DropdownUIButtons
       #Select Object
-    self.selectGridObjectDropdown = SelectGridObjectDropdown(self.gameWindow, [230, 230, 230], "Select Object", 100, 30, 30, 80)
-    self.selectGridObjectMenu = SelectGridObjectMenu(self.gameWindow, ["Wall", "Solver", "Goal"], [go.WALL, go.SOLVER, go.GOAL], 60, 15, 52, 120)
+    self.selectGridObjectDropdown = SelectGridObjectDropdown(self.gameWindow, [230, 230, 230], "Select Object", 120, 30, 30, 80)
+    self.selectGridObjectMenu = SelectGridObjectMenu(self.gameWindow, ["Wall", "Solver", "Goal"], [go.WALL, go.SOLVER, go.GOAL], 70, 30, 52, 120)
       #Select Past Grid
     self.selectPastGridsDropdown = SelectPastGridsDropdown(self.gameWindow, [230, 230, 230], "Select Object", 75, 30, 30, 50)
       #Select Solving Algorithm
-    self.solveAlgorithmDropdown = SolveAlgorithmDropdown(self.gameWindow, [230, 230, 230], "Pick Algorithm", 100, 30, 30, 230)
-    self.solveAlgorithmMenu = SolveAlgorithmMenu(self.gameWindow, ["BFS", "DFS", "Dijkstra", "A*"], ["option 1", "option 2", "option 3", "option 4"], 70, 15, 47, 270)
+    self.solveAlgorithmDropdown = SolveAlgorithmDropdown(self.gameWindow, [230, 230, 230], "Pick Algorithm", 120, 30, 30, 230)
+    self.solveAlgorithmMenu = SolveAlgorithmMenu(self.gameWindow, ["BFS", "DFS", "Dijkstra", "A*"], ["option 1", "option 2", "option 3", "option 4"], 80, 40, 47, 270)
       #Select Sort Algorithm
     self.sortAlgorithmDropdown = SortAlgorithmDropdown(self.gameWindow, [230, 230, 230], "Select Object", 75, 30, 30, 50)
 
@@ -136,7 +136,7 @@ class ViewManager():
         #----------------------------------------
         
         #MODEL
-        self.modelManager.gridMetaData.ChangeGridData(changeInGridSize[0], changeInGridSize[1], False)
+        self.modelManager.gridMetaData.ChangeGridData(changeInGridSize[0], changeInGridSize[1], False, False)
         #if self.placingOnGrid == True:
           #self.modelManager.gridMetaData.ChangeGridIndices(self.currentGridIndex, self.currentGridObject)
 
@@ -215,7 +215,7 @@ class ViewManager():
   
   def MouseUpHandler(self):
     for method in self.buttonList:
-      self.gameState = method.UnclickButton(self.currentGridData[0], self.currentGridData[1], self.currentGridData[2])
+      self.gameState = method.UnclickButton(self.currentGridData[0], self.currentGridData[1], self.currentGridData[2], self.currentGridData[3])
       if self.gameState != gs.CREATING_MAZE:
         break
 
@@ -229,7 +229,7 @@ class ViewManager():
 
   def DrawingButtonsGridAndSliderHandler(self, currentGridData):
     #drawing buttons and grid--------------
-      self.uiGrid.Draw(currentGridData[0], currentGridData[2], self.mouseX, self.mouseY, self.currentGridObject)
+      self.uiGrid.Draw(currentGridData[0], currentGridData[2], self.mouseX, self.mouseY, self.currentGridObject, currentGridData[3])
 
       
       for method in self.buttonList:

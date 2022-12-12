@@ -16,8 +16,8 @@ class UIUndoButton(AbstractUIButton):
     super().ClickButton(mouseX, mouseY)
     return gs.CREATING_MAZE
 
-  def UnclickButton(self, currentGrid, currentGridSize, currentPastGrids):
+  def UnclickButton(self, currentGrid, currentGridSize, currentPastGrids, currentPastGridsIndex):
     if pygame.mouse.get_pressed()[0] == 0 and self.clicked == True:
       print("unclick grid size:", len(currentGrid))
-      self.viewManager.controllerManager.undoController.Undo(currentGrid, currentGridSize, currentPastGrids)
+      self.viewManager.controllerManager.undoController.Undo(currentGrid, currentGridSize, currentPastGrids, currentPastGridsIndex)
     return super().UnclickButton()
