@@ -1,7 +1,7 @@
 
 
 
-class UISolveSortButton():
+class UISortButton():
 
   def __init__(self):
     print("wip")

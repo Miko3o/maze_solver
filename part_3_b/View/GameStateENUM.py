@@ -34,3 +34,9 @@ class GridObjects(Enum):
   GOAL = auto()
   FINDER = auto()
   PATH = auto()
+
+class SolvingAlgorithm(Enum):
+  BFS = auto()
+  DFS = auto()
+  Dijkstra = auto()
+  Astar = auto()

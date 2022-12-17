@@ -23,6 +23,7 @@ class GridController():
         for n in range(len(currentGrid)):
           currentGrid[n].append(go.NOTHING)
           newArray.append(go.NOTHING)
+        newArray.append(go.NOTHING)
         #increase grid hieght
         currentGrid.append(newArray)
       gridSize = newGridSize

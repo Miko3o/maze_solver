@@ -1,4 +1,4 @@
-from View.GameStateENUM import GameState as gs, LoopState as ls, GridObjects as go
+from View.GameStateENUM import GameState as gs, LoopState as ls, GridObjects as go, SolvingAlgorithm as sa
 import pygame
 from sys import exit
 
@@ -10,7 +10,8 @@ from View.UIButtons.UIGravityButton import UIGravityButton
 from View.UIButtons.UILoadButton import UILoadButton
 from View.UIButtons.UIRedoButton import UIRedoButton
 from View.UIButtons.UISaveButton import UISaveButton
-from View.UIButtons.UISolveSortButton import UISolveSortButton
+from View.UIButtons.UISolveButton import UISolveButton
+from View.UIButtons.UISortButton import UISortButton
 from View.UIButtons.UIUndoButton import UIUndoButton
 from View.UIDropdownButtons.SelectGridObjectDropdown import SelectGridObjectDropdown
 from View.UIDropdownButtons.SelectGridObjectMenu import SelectGridObjectMenu
@@ -25,12 +26,15 @@ pygame.init()
 
 class ViewManager():
   def __init__(self):
-    #managers:
-    self.controllerManager = ControllerManager(self)
-    self.modelManager = ModelManager(go.NOTHING, go.WALL, go.SOLVER, go.GOAL, go.FINDER, go.PATH)
 
     #gamewindow:
     self.gameWindow = pygame.display.set_mode((600, 400))
+
+    #managers:
+    self.controllerManager = ControllerManager(self, self.gameWindow)
+    self.modelManager = ModelManager(go.NOTHING, go.WALL, go.SOLVER, go.GOAL, go.FINDER, go.PATH)
+
+    
 
     #UI Objects
     #grid
@@ -38,25 +42,25 @@ class ViewManager():
 
     self.currentGridObject = go.WALL
     self.uiGrid = UIGrid(self.gameWindow, self, self.currentGridObject)
-    #self.currentGridObject = go.WALL
     
     #UIButtons
     self.uiGravityButton = UIGravityButton()
     self.uiLoadButton = UILoadButton(self.gameWindow, self, [158, 234, 255], (18, 58, 142), "Load", 75, 30, 30, 17)
     self.uiRedoButton = UIRedoButton(self.gameWindow, self, [125, 255, 203], (56, 128, 93,), ">", 30, 30, 540, 17)
     self.uiSaveButton = UISaveButton(self.gameWindow, self, [255, 150, 173], (139, 49, 73), "Save", 75, 30, 130, 17)
-    self.uiSolveSortButton = UISolveSortButton()
+    self.uiSolveButton = UISolveButton(self.gameWindow, self, [255, 205, 119], (169, 119, 33), "SOLVE", 90, 70, 472, 129)
+    self.uiSortButton = UISortButton()
     self.uiUndoButton = UIUndoButton(self.gameWindow, self, [125, 255, 203], (56, 128, 93,), "<", 30, 30, 500, 17)
     
     #DropdownUIButtons
       #Select Object
     self.selectGridObjectDropdown = SelectGridObjectDropdown(self.gameWindow, [230, 230, 230], "Select Object", 120, 30, 30, 80)
-    self.selectGridObjectMenu = SelectGridObjectMenu(self.gameWindow, ["Wall", "Solver", "Goal"], [go.WALL, go.SOLVER, go.GOAL], 70, 30, 52, 120)
+    self.selectGridObjectMenu = SelectGridObjectMenu(self.gameWindow, self, ["Wall", "Solver", "Goal"], [go.WALL, go.SOLVER, go.GOAL], 70, 30, 52, 120)
       #Select Past Grid
     self.selectPastGridsDropdown = SelectPastGridsDropdown(self.gameWindow, [230, 230, 230], "Select Object", 75, 30, 30, 50)
       #Select Solving Algorithm
     self.solveAlgorithmDropdown = SolveAlgorithmDropdown(self.gameWindow, [230, 230, 230], "Pick Algorithm", 120, 30, 30, 230)
-    self.solveAlgorithmMenu = SolveAlgorithmMenu(self.gameWindow, ["BFS", "DFS", "Dijkstra", "A*"], ["option 1", "option 2", "option 3", "option 4"], 80, 40, 47, 270)
+    self.solveAlgorithmMenu = SolveAlgorithmMenu(self.gameWindow, self, ["BFS", "DFS", "Dijkstra", "A*"], [sa.BFS, sa.DFS, sa.Dijkstra, sa.Astar], 80, 40, 47, 270)
       #Select Sort Algorithm
     self.sortAlgorithmDropdown = SortAlgorithmDropdown(self.gameWindow, [230, 230, 230], "Select Object", 75, 30, 30, 50)
 
@@ -88,7 +92,7 @@ class ViewManager():
     self.mouseY = None
 
     #button arrays
-    self.buttonList = [self.uiLoadButton, self.uiSaveButton, self.uiUndoButton, self.uiRedoButton, self.selectGridObjectDropdown, self.solveAlgorithmDropdown]
+    self.buttonList = [self.uiLoadButton, self.uiSaveButton, self.uiUndoButton, self.uiRedoButton, self.uiSolveButton, self.selectGridObjectDropdown, self.solveAlgorithmDropdown]
 
     #grid info
     self.currentGridData = None
@@ -208,7 +212,7 @@ class ViewManager():
 
         
     self.uiSlideSquare.ClickButton(self.mouseX, self.mouseY)
-    #print("mouseDown pos:", self.mouseX, self.mouseY)
+    print("mouseDown pos:", self.mouseX, self.mouseY)
 
 
 
@@ -220,7 +224,8 @@ class ViewManager():
         break
 
           
-    self.currentGridObject = self.selectGridObjectMenu.UnclickOption(self.mouseX, self.mouseY)
+    self.selectGridObjectMenu.UnclickOption(self.mouseX, self.mouseY)
+    self.solveAlgorithmMenu.UnclickOption(self.mouseX, self.mouseY)
     self.uiSlideSquare.UnclickButton(self.mouseX, self.mouseY)
     #print("mouseUp pos:  ", self.mouseX, self.mouseY)
 
@@ -238,3 +243,8 @@ class ViewManager():
       #drawing slider
       self.uiBar.Draw()
       self.uiSlideSquare.Draw(self.mouseX, self.mouseY)
+
+  def ChangeGridObject(self, changedObject):
+    self.currentGridObject = changedObject
+    print("currentGridObject:", self.currentGridObject)
+

@@ -1,6 +1,6 @@
 import csv
 import os
-
+from View.GameStateENUM import GridObjects as go
 
 class SaveMazeController():
 
@@ -17,4 +17,18 @@ class SaveMazeController():
     print(count)
     with open('Controller\MazeFiles\maze' + str(count) + '.csv', 'w') as mazeFile:
       writer = csv.writer(mazeFile)
-      writer.writerow([currentGrid, gridSize])
+      newGrid = self.ChangeGrid(currentGrid)
+      writer.writerow([newGrid, gridSize])
+
+  def ChangeGrid(self, currentGrid):
+    for gridRow in range(len(currentGrid)):
+      for gridSquare in range(len(currentGrid[gridRow])):
+        if currentGrid[gridRow][gridSquare] == go.NOTHING:
+          currentGrid[gridRow][gridSquare] = "N"
+        elif currentGrid[gridRow][gridSquare] == go.WALL:
+          currentGrid[gridRow][gridSquare] = "W"
+        elif currentGrid[gridRow][gridSquare] == go.SOLVER:
+          currentGrid[gridRow][gridSquare] = "S"
+        elif currentGrid[gridRow][gridSquare] == go.GOAL:
+          currentGrid[gridRow][gridSquare] = "G"
+    return currentGrid

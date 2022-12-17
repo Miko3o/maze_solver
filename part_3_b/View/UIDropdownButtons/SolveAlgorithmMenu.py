@@ -16,5 +16,7 @@ class SolveAlgorithmMenu(AbstractUIDropdownMenu):
     super().ClickButton(mouseX, mouseY)
 
 
-  def UnclickButton(self, mouseX, mouseY):
-    return super().UnclickButton(mouseX, mouseY)
+  def UnclickOption(self, mouseX, mouseY):
+    algorithmChoice = super().UnclickOption(mouseX, mouseY)
+    if algorithmChoice != 0:
+      self.viewManager.controllerManager.solveMazeController.ChangeStrategy(algorithmChoice)

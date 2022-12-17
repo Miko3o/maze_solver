@@ -1,10 +1,10 @@
+from Controller.Strategies.AbstractStrategy import AbstractStrategy
 
 
+class SolveMazeDijkstra(AbstractStrategy):
 
-class SolveMazeDijkstra():
-
-  def __init__(self):
-    print("wip")
-
+  def __init__(self, *args):
+    super().__init__(*args)
+    
   def Solve(self):
     print("wip")

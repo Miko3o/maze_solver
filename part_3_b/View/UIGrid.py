@@ -100,6 +100,7 @@ class UIGrid():
         #drawing squares
         for squareMethod in self.uiSquareList:
           
+
           #draw square
           lineStartPositionxANDIndexSquareTuple = squareMethod.Draw(self.gameWindow, currentGrid, gridRow, square, lineStartPositionx, lineStartPositiony, distanceBetweenRows)
           lineStartPositionxANDIndexSquare = list(lineStartPositionxANDIndexSquareTuple)

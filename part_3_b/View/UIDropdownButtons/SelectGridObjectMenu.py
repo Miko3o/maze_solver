@@ -17,5 +17,7 @@ class SelectGridObjectMenu(AbstractUIDropdownMenu):
 
 
   def UnclickOption(self, mouseX, mouseY):
-    return super().UnclickOption(mouseX, mouseY)
+    objectChoice = super().UnclickOption(mouseX, mouseY)
+    if objectChoice != 0:
+      self.viewManager.ChangeGridObject(objectChoice)
 

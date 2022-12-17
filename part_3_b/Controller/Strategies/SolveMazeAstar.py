@@ -1,10 +1,10 @@
+from Controller.Strategies.AbstractStrategy import AbstractStrategy
 
 
+class SolveMazeAstar(AbstractStrategy):
 
-class SolveMazeAstar():
-
-  def __init__(self):
-    print("wip")
-
+  def __init__(self, *args):
+    super().__init__(*args)
+    
   def Solve(self):
     print("wip")

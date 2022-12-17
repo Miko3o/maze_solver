@@ -3,8 +3,9 @@
 
 class AbstractStrategy():
 
-  def __init__(self):
-    print("wip")
+  def __init__(self, viewManager, gameWindow):
+    self.viewManager = viewManager
+    self.gameWindow = gameWindow
 
   def Solve(self):
     print("wip")

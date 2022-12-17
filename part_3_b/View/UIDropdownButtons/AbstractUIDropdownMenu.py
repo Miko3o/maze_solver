@@ -3,10 +3,11 @@ from View.GameStateENUM import GridObjects as go
 
 class AbstractUIDropdownMenu():
 
-  def __init__(self, gameWindow, menuText, menuReturn, menuWidth, menuHeight, displayX, displayY):
+  def __init__(self, gameWindow, viewManager, menuText, menuReturn, menuWidth, menuHeight, displayX, displayY):
 
     #menu properties
     self.gameWindow = gameWindow
+    self.viewManager = viewManager
     self.menuColor = (255, 255, 255)
     self.menuText = menuText
     self.menuReturn = menuReturn
@@ -28,7 +29,7 @@ class AbstractUIDropdownMenu():
     self.mouseHover = False
 
     #grid object
-    self.gridObject = go.WALL
+    self.returnOption = go.WALL
 
 
   def Draw(self, mouseX, mouseY):
@@ -58,7 +59,7 @@ class AbstractUIDropdownMenu():
         if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
           self.clicked = True
           optionsRect = pygame.draw.rect(self.gameWindow, (100, 100, 100), [self.displayX, self.displayY + previousTextHeight + previousTextSpacing + 5, self.menuWidth, self.menuHeight])
-          self.gridObject = ret
+          self.returnOption = ret
           print("menu selection clicked")
 
         
@@ -93,8 +94,7 @@ class AbstractUIDropdownMenu():
   def UnclickOption(self, mouseX, mouseY):
     #button off click
     if pygame.mouse.get_pressed()[0] == 0 and self.clicked == True:
-      print("Grid Object:", self.gridObject)
       self.clicked = False
-      return self.gridObject
+      return self.returnOption
     else:
-      return self.gridObject
+      return 0

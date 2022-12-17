@@ -1,10 +1,10 @@
+from Controller.Strategies.AbstractStrategy import AbstractStrategy
 
 
+class IntersectionSort(AbstractStrategy):
 
-class IntersectionSort():
-
-  def __init__(self):
-    print("wip")
-
+  def __init__(self, *args):
+    super().__init__(*args)
+    
   def Sort(self):
     print("wip")
