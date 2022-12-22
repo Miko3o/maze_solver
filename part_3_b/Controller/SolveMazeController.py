@@ -16,6 +16,10 @@ class SolveMazeController():
       self.controllerManager.solveMazeBFS.Solve(currentGrid, currentPastGrids, currentPastGridsIndex)
     elif self.solvingAlgorithm == sa.DFS:
       self.controllerManager.solveMazeDFS.Solve(currentGrid, currentPastGrids, currentPastGridsIndex)
+    elif self.solvingAlgorithm == sa.Dijkstra:
+      self.controllerManager.solveMazeDijkstra.Solve(currentGrid, currentPastGrids, currentPastGridsIndex)
+    elif self.solvingAlgorithm == sa.Astar:
+      self.controllerManager.solveMazeAstar.Solve(currentGrid, currentPastGrids, currentPastGridsIndex)
 
 
   def ChangeStrategy(self, newStrategy):

@@ -106,6 +106,7 @@ class SolveMazeBFS(AbstractStrategy):
     while True:
       #coorelates current node with the node it came from
       currentIndex = visited.index(currentNode) - 1
+      print("currentIndex:", currentIndex)
       currentNode = origin[currentIndex]
 
       self.DrawPathBackSquaresHandler(currentGrid, gameWindow, currentNode)

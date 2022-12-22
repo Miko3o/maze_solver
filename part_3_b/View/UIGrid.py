@@ -45,6 +45,7 @@ class UIGrid():
     self.gridBackground = pygame.draw.rect(self.gameWindow, (240, 240, 240), [160, 60, 280, 280])
     self.currentGridObject = currentGridObject
     distanceBetweenRows = 280 / len(currentGrid)
+    
 
     #squares
     self.DrawSquaresHandler(160, 60, distanceBetweenRows, currentGrid, pastGrids, mouseX, mouseY, currentGridObject, currentPastGridsIndex)
@@ -94,7 +95,7 @@ class UIGrid():
 
 
   
-  def DrawSquaresHandler(self, lineStartPositionx, lineStartPositiony, distanceBetweenRows, currentGrid, pastGrids, mouseX, mouseY, currentGridObject, currentPastGridsIndex):
+  def DrawSquaresHandler(self, lineStartPositionx, lineStartPositiony, distanceBetweenRows, currentGrid, pastGrids, mouseX, mouseY, currentGridObject, currentPastGridsIndex):  
     for gridRow in range(len(currentGrid)):
       for square in range(len(currentGrid[gridRow])):
         #drawing squares
@@ -104,7 +105,9 @@ class UIGrid():
           #draw square
           lineStartPositionxANDIndexSquareTuple = squareMethod.Draw(self.gameWindow, currentGrid, gridRow, square, lineStartPositionx, lineStartPositiony, distanceBetweenRows)
           lineStartPositionxANDIndexSquare = list(lineStartPositionxANDIndexSquareTuple)
+          #print(lineStartPositionxANDIndexSquare[0])
           lineStartPositionx += lineStartPositionxANDIndexSquare[0]
+          #lineStartPositionx = 160 + (square*distanceBetweenRows)
           
           #click square
           self.currentGridIndex = (gridRow, square)

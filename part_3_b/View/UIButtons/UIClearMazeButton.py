@@ -2,7 +2,7 @@ import pygame
 from View.UIButtons.AbstractUIButton import AbstractUIButton
 from View.GameStateENUM import GameState as gs
 
-class UIGravityButton(AbstractUIButton):
+class UIClearMazeButton(AbstractUIButton):
 
   def __init__(self, *args):
     super().__init__(*args)
@@ -18,5 +18,5 @@ class UIGravityButton(AbstractUIButton):
 
   def UnclickButton(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     if pygame.mouse.get_pressed()[0] == 0 and self.clicked == True:
-      self.viewManager.controllerManager.gravityController.Gravity()
+      self.viewManager.controllerManager.clearMazeController.ClearMaze(currentGrid)
     return super().UnclickButton()

@@ -6,6 +6,7 @@ from Controller.ControllerManager import ControllerManager
 from Model.ModelManager import ModelManager
 
 from View.UIGrid import UIGrid
+from View.UIButtons.UIClearMazeButton import UIClearMazeButton
 from View.UIButtons.UIGravityButton import UIGravityButton
 from View.UIButtons.UILoadButton import UILoadButton
 from View.UIButtons.UIRedoButton import UIRedoButton
@@ -44,11 +45,12 @@ class ViewManager():
     self.uiGrid = UIGrid(self.gameWindow, self, self.currentGridObject)
     
     #UIButtons
-    self.uiGravityButton = UIGravityButton()
+    self.uiClearMazeButton = UIClearMazeButton(self.gameWindow, self, [255, 247, 98], (190, 181, 17), "Clear Maze", 180, 30, 260, 17)
+    self.uiGravityButton = UIGravityButton(self.gameWindow, self, [226, 128, 241], (150, 54, 165), "GRAVITY", 100, 70, 472, 150)
     self.uiLoadButton = UILoadButton(self.gameWindow, self, [158, 234, 255], (18, 58, 142), "Load", 75, 30, 30, 17)
     self.uiRedoButton = UIRedoButton(self.gameWindow, self, [125, 255, 203], (56, 128, 93,), ">", 30, 30, 540, 17)
     self.uiSaveButton = UISaveButton(self.gameWindow, self, [255, 150, 173], (139, 49, 73), "Save", 75, 30, 130, 17)
-    self.uiSolveButton = UISolveButton(self.gameWindow, self, [255, 205, 119], (169, 119, 33), "SOLVE", 90, 70, 472, 129)
+    self.uiSolveButton = UISolveButton(self.gameWindow, self, [255, 205, 119], (169, 119, 33), "SOLVE", 100, 70, 472, 70)
     self.uiSortButton = UISortButton()
     self.uiUndoButton = UIUndoButton(self.gameWindow, self, [125, 255, 203], (56, 128, 93,), "<", 30, 30, 500, 17)
     
@@ -92,7 +94,7 @@ class ViewManager():
     self.mouseY = None
 
     #button arrays
-    self.buttonList = [self.uiLoadButton, self.uiSaveButton, self.uiUndoButton, self.uiRedoButton, self.uiSolveButton, self.selectGridObjectDropdown, self.solveAlgorithmDropdown]
+    self.buttonList = [self.uiLoadButton, self.uiSaveButton, self.uiUndoButton, self.uiRedoButton, self.uiSolveButton, self.uiGravityButton, self.uiClearMazeButton, self.selectGridObjectDropdown, self.solveAlgorithmDropdown]
 
     #grid info
     self.currentGridData = None

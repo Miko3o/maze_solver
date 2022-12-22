@@ -1,6 +1,7 @@
 import Model.ModelManager
 import View.ViewManager
 
+from Controller.ClearMazeController import ClearMazeController
 from Controller.GravityController import GravityController
 from Controller.GridController import GridController
 from Controller.GridObjectController import GridObjectController
@@ -31,7 +32,8 @@ class ControllerManager():
     self.viewManager = View.ViewManager.ViewManager
 
     #Controllers
-    self.gravityController = GravityController()
+    self.clearMazeController = ClearMazeController(viewManager)
+    self.gravityController = GravityController(viewManager)
     self.gridController = GridController()
     self.gridObjectController = GridObjectController(viewManager)
     self.loadMazeController = LoadMazeController(viewManager)
@@ -49,7 +51,7 @@ class ControllerManager():
     self.quickSort = QuickSort(viewManager, gameWindow)
     self.radixSort = RadixSort(viewManager, gameWindow)
     self.selectionSort = SelectionSort(viewManager, gameWindow)
-    self.sovleMazeAstar = SolveMazeAstar(viewManager, gameWindow)
+    self.solveMazeAstar = SolveMazeAstar(viewManager, gameWindow)
     self.solveMazeBFS = SolveMazeBFS(viewManager, gameWindow)
     self.solveMazeDFS = SolveMazeDFS(viewManager, gameWindow)
     self.solveMazeDijkstra = SolveMazeDijkstra(viewManager, gameWindow)

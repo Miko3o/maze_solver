@@ -80,6 +80,5 @@ class GridObjectController():
       for square in range(len(self.currentGrid[gridRow])):
         if self.currentGrid[gridRow][square] == gridObject:
           return True
-        if existCondition == False:
-          self.currentGrid[newIndexList[0]][newIndexList[1]] = gridObject
-          return True
+    self.currentGrid[newIndexList[0]][newIndexList[1]] = gridObject
+    return True
