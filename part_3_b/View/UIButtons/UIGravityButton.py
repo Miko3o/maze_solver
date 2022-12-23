@@ -18,5 +18,7 @@ class UIGravityButton(AbstractUIButton):
 
   def UnclickButton(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     if pygame.mouse.get_pressed()[0] == 0 and self.clicked == True:
-      self.viewManager.controllerManager.gravityController.Gravity()
+      self.viewManager.controllerManager.gravityController.Gravity(currentGrid)
+      super().UnclickButton()
+      return gs.SORTING_SOLVED_MAZE
     return super().UnclickButton()

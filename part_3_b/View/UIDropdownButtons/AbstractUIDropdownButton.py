@@ -3,7 +3,7 @@ from View.GameStateENUM import GameState as gs, ButtonType as bt
 
 class AbstractUIDropdownButton():
 
-  def __init__(self, gameWindow, buttonColor, buttonText, buttonWidth, buttonHeight, displayX, displayY):
+  def __init__(self, gameWindow, buttonColor, buttonText, buttonWidth, buttonHeight, displayX, displayY, viewManager):
 
     #button properties
     self.gameWindow = gameWindow
@@ -13,6 +13,9 @@ class AbstractUIDropdownButton():
     self.buttonHeight = buttonHeight
     self.displayX = displayX
     self.displayY = displayY
+
+    #View Manager
+    self.viewManager = viewManager
 
     #rectangle
     self.rect = pygame.draw.rect(self.gameWindow, (self.buttonColor), [self.displayX, self.displayY, self.buttonWidth, self.buttonHeight])
@@ -94,5 +97,9 @@ class AbstractUIDropdownButton():
       print("unclicked")
       self.clicked = False
       return gs.PICKING_SOLVING_ALG
+    elif pygame.mouse.get_pressed()[0] == 0 and self.clicked == True and buttonType == bt.PICK_SORT_ALG:
+      print("unclicked")
+      self.clicked = False
+      return gs.PICKING_SORTING_ALG
     else:
       return gs.CREATING_MAZE

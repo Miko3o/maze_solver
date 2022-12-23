@@ -16,7 +16,8 @@ class UIClearMazeButton(AbstractUIButton):
     super().ClickButton(mouseX, mouseY)
     return gs.CREATING_MAZE
 
-  def UnclickButton(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
+  def UnclickButton(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex, gameState):
     if pygame.mouse.get_pressed()[0] == 0 and self.clicked == True:
       self.viewManager.controllerManager.clearMazeController.ClearMaze(currentGrid)
+      self.viewManager.ChangeGameState(gs.CREATING_MAZE)
     return super().UnclickButton()

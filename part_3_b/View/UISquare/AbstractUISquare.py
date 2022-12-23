@@ -1,4 +1,5 @@
 import pygame
+from View.GameStateENUM import GameState as gs
 
 
 class AbstractUISquare():
@@ -34,7 +35,9 @@ class AbstractUISquare():
     if pygame.mouse.get_pressed()[0] == 0 and self.leftClicked == True and self.rightClicked == False:
       self.leftClicked = False
       self.uiGrid.viewManager.controllerManager.gridObjectController.UnclickToSavePastGrids(pastGrids, currentGrid, currentPastGridsIndex)
+      self.uiGrid.viewManager.ChangeGameState(gs.CREATING_MAZE)
     if pygame.mouse.get_pressed()[2] == 0 and self.rightClicked == True and self.leftClicked == False:
       self.rightClicked = False
       self.uiGrid.viewManager.controllerManager.gridObjectController.UnclickToSavePastGrids(pastGrids, currentGrid, currentPastGridsIndex)
+      self.uiGrid.viewManager.ChangeGameState(gs.CREATING_MAZE)
     

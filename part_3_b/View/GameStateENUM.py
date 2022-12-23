@@ -40,3 +40,11 @@ class SolvingAlgorithm(Enum):
   DFS = auto()
   Dijkstra = auto()
   Astar = auto()
+
+class SortingAlgorithm(Enum):
+  BubbleSort = auto()
+  IntersectionSort = auto()
+  MergeSort = auto()
+  QuickSort = auto()
+  RadixSort = auto()
+  SelectionSort = auto()

@@ -41,7 +41,7 @@ class ControllerManager():
     self.redoController = RedoController(viewManager)
     self.saveMazeController = SaveMazeController()
     self.solveMazeController = SolveMazeController(self, viewManager)
-    self.sortWallsController = SortWallsController()
+    self.sortWallsController = SortWallsController(self, viewManager)
     self.undoController = UndoController(viewManager)
 
     #Strategies
