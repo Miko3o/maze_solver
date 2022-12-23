@@ -11,19 +11,19 @@ class SortWallsController():
   def SetData(self):
     print("wip")
 
-  def Sort(self, currentGrid):
+  def Sort(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     if self.sortingAlgorithm == sra.BubbleSort:
-      self.controllerManager.bubbleSort.Sort(currentGrid)
+      self.controllerManager.bubbleSort.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     elif self.sortingAlgorithm == sra.IntersectionSort:
-      self.controllerManager.intersectionSort.Sort(currentGrid)
+      self.controllerManager.intersectionSort.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     elif self.sortingAlgorithm == sra.MergeSort:
-      self.controllerManager.mergeSort.Sort(currentGrid)
+      self.controllerManager.mergeSort.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     elif self.sortingAlgorithm == sra.QuickSort:
-      self.controllerManager.quickSort.Sort(currentGrid)
+      self.controllerManager.quickSort.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     elif self.sortingAlgorithm == sra.RadixSort:
-      self.controllerManager.radixSort.Sort(currentGrid)
+      self.controllerManager.radixSort.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     elif self.sortingAlgorithm == sra.SelectionSort:
-      self.controllerManager.selectionSort.Sort(currentGrid)
+      self.controllerManager.selectionSort.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
 
   def ChangeStrategy(self, newStrategy):
     self.sortingAlgorithm = newStrategy

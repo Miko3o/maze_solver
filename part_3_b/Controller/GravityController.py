@@ -19,10 +19,7 @@ class GravityController():
       scanComplete = True
       for gridRow in range(len(currentGrid) - 1):
         for square in range(len(currentGrid[gridRow])):
-          #get index of square under
-          underSquare = [square, gridRow - 1]
           
-
 
           if currentGrid[gridRow + 1][square] == go.NOTHING and currentGrid[gridRow][square] == go.WALL and gridRow + 1 != -1:
             currentGrid[gridRow][square] = go.NOTHING
@@ -36,7 +33,7 @@ class GravityController():
               pygame.quit()
               exit()
         pygame.display.update()
-        clock.tick(70)
+        clock.tick(90)
       if scanComplete == True:
         break
           

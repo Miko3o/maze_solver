@@ -218,8 +218,9 @@ class ViewManager():
     for method in self.buttonList:
       method.ClickButton(self.mouseX, self.mouseY)
     self.uiClearMazeButton.ClickButton(self.mouseX, self.mouseY)
-    self.sortAlgorithmDropdown.ClickButton(self.mouseX, self.mouseY)
-    self.uiSortButton.ClickButton(self.mouseX, self.mouseY)
+    if self.gameState == gs.SORTING_SOLVED_MAZE or self.gameState == gs.PICKING_SORTING_ALG: 
+      self.sortAlgorithmDropdown.ClickButton(self.mouseX, self.mouseY)
+      self.uiSortButton.ClickButton(self.mouseX, self.mouseY)
 
 
 

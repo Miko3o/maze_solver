@@ -18,5 +18,5 @@ class UISortButton(AbstractUIButton):
 
   def UnclickButton(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     if pygame.mouse.get_pressed()[0] == 0 and self.clicked == True:
-      self.viewManager.controllerManager.sortWallsController.Sort(currentGrid)
+      self.viewManager.controllerManager.sortWallsController.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     return super().UnclickButton()

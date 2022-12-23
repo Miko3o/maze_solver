@@ -7,5 +7,5 @@ class MergeSort(AbstractStrategy):
   def __init__(self, *args):
     super().__init__(*args)
     
-  def Sort(self, currentGrid):
+  def Sort(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     print("wip")
