@@ -96,7 +96,7 @@ class SolveMazeBFS(AbstractStrategy):
 
 
   def BackTrack(self, currentGrid, poppedNode, neighbor, visited, origin, gameWindow):
-    #first node
+    #step 1: turn the node that found the goal into a path
     currentGrid[poppedNode[1]][poppedNode[0]] = go.PATH
     currentNode = [poppedNode[0], poppedNode[1]]
     self.DrawPathBackSquaresHandler(currentGrid, gameWindow, currentNode)
@@ -115,7 +115,7 @@ class SolveMazeBFS(AbstractStrategy):
         return
       else:
         currentGrid[currentNode[1]][currentNode[0]] = go.PATH
-
+      #update UI
       for event in pygame.event.get():      
         if event.type == pygame.QUIT:
             pygame.quit()
