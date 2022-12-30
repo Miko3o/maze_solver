@@ -8,56 +8,73 @@ class MergeSort(AbstractStrategy):
 
   def __init__(self, *args):
     super().__init__(*args)
+    self.realSortedWalls = []
+    self.currentSortingIndex = 0
+    self.level = 0
+    self.levelSaver = 0
+    self.levelChangeStart = 0
     
   def Sort(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     wallHeights = super().Sort(currentGrid)
-    wallHeightsWithIndex = []
+    self.realSortedWalls = wallHeights
+    #wallHeightsWithIndex = []
 
     #get original index
-    for originalIndex in range(len(wallHeights)):
-      wallHeightsWithIndex.append([wallHeights[originalIndex], originalIndex])
+    #for originalIndex in range(len(wallHeights)):
+      #wallHeightsWithIndex.append([wallHeights[originalIndex], originalIndex])
 
     #do the sort
-    sortedWalls = self.MergeSort(wallHeightsWithIndex, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+    sortedWalls = self.MergeSort(wallHeights, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     print(sortedWalls)
 
   def MergeSort(self, wallHeights, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
-    firstHalf = []
-    secondHalf = []
+    newWallHeights = [[], []]
 
 
     if len(wallHeights) == 1:
+      self.level += 1
       return wallHeights
 
     #half up the arrays
     #from start to half
     for index in range(floor(len(wallHeights)/2)):
-      firstHalf.append(wallHeights[index])
+      newWallHeights[0].append(wallHeights[index])
     #from half to end
     for index in range(floor(len(wallHeights)/2), len(wallHeights)):
-      secondHalf.append(wallHeights[index])
+      newWallHeights[1].append(wallHeights[index])
     
-    print("1st:", firstHalf)
-    print("2nd:", secondHalf)
+    print(newWallHeights)
+    print("1st:", newWallHeights[0])
+    print("2nd:", newWallHeights[1])
 
-
-
-
+    self.level += 1
+    print("level:", self.level)
+    
 
     #recursion
-    firstHalf = self.MergeSort(firstHalf, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+    newWallHeights[0] = self.MergeSort(newWallHeights[0], currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     print("firstHalf recursion done")
-    secondHalf = self.MergeSort(secondHalf, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+    self.level -= 1
+    
+
+    newWallHeights[1] = self.MergeSort(newWallHeights[1], currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
     print("secondHalf recursion done")
 
-    return self.Merge(firstHalf, secondHalf, firstHalf[0][1], currentGrid, currentPastGrids, currentPastGridsIndex)
+    self.level -= 1
+
+    
+
+    
+
+    return self.Merge(newWallHeights[0], newWallHeights[1], newWallHeights[0][0], currentGrid, currentPastGrids, currentPastGridsIndex)
 
   def Merge(self, firstHalf, secondHalf, startingIndex, currentGrid, currentPastGrids, currentPastGridsIndex):
     sortedArray = []
 
+
     #compare the first index of the two arrays. whatever is smaller gets appended to the sorted array
     while firstHalf and secondHalf:
-      if firstHalf[0][0] > secondHalf[0][0]:
+      if firstHalf[0] > secondHalf[0]:
         sortedArray.append(secondHalf[0])  
         secondHalf.pop(0)
       else:
@@ -75,7 +92,30 @@ class MergeSort(AbstractStrategy):
       sortedArray.append(secondHalf[0])  
       secondHalf.pop(0)
 
-    self.SwapIndexes(currentGrid, startingIndex, sortedArray, currentPastGrids, currentPastGridsIndex)
+    if self.level == self.levelSaver:
+      self.realSortedWalls[self.currentSortingIndex] = sortedArray
+      self.realSortedWalls.pop(self.currentSortingIndex + 1)
+      self.currentSortingIndex += 1
+    elif self.level == self.levelSaver + 1:
+      self.realSortedWalls[self.levelChangeStart] = sortedArray
+      self.realSortedWalls.pop(self.currentSortingIndex + 1)
+      self.currentSortingIndex += 1
+      self.levelSaver = self.level
+    else:
+      self.realSortedWalls[0] = sortedArray
+      self.currentSortingIndex = 0
+      self.realSortedWalls.pop(self.currentSortingIndex + 1)
+      self.currentSortingIndex += 1
+      self.levelSaver = self.level
+      self.levelChangeStart += 1
+
+
+    print("WHOLE currentWalls:", self.realSortedWalls)
+        
+    
+
+
+    #self.SwapIndexes(currentGrid, startingIndex, sortedArray, currentPastGrids, currentPastGridsIndex)
     print("sorted:", sortedArray)
     return sortedArray
 
