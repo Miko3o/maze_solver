@@ -36,6 +36,6 @@ class BubbleSort(AbstractStrategy):
           currentGrid[gridRow][currentIndex + 1] = gridIndexToBeSwapped
 
       self.viewManager.modelManager.gridMetaData.ChangeGridData(currentGrid, False, False, False)
-      self.viewManager.uiGrid.Draw(currentGrid, currentPastGrids, 0, 0, go.NOTHING, currentPastGridsIndex)
+      self.viewManager.uiGrid.Draw(currentGrid, currentPastGrids, 0, 0, go.NOTHING, 1)
 
     

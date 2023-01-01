@@ -61,6 +61,7 @@ class GridObjectController():
     self.viewManager.modelManager.gridMetaData.ChangeGridData(self.currentGrid, False, pastGrids, currentPastGridsIndex)
 
   def ConvertIndexToPositiveNumberHandler(self, pastGrids, currentPastGridsIndex):
+    print("currentPastGridsIndex:", currentPastGridsIndex)
     indexItem = pastGrids[currentPastGridsIndex]
     print("pastGrids index:", pastGrids.index(indexItem) + 1)
     return pastGrids.index(indexItem) + 1
