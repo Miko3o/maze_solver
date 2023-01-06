@@ -13,7 +13,7 @@ class IntersectionSort(AbstractStrategy):
     for i in range(len(wallHeights)):
       currentIndex = i
       while currentIndex > 0 and wallHeights[currentIndex] < wallHeights[currentIndex - 1]:
-        self.SwapIndexes(currentGrid, wallHeights, currentIndex, gridSize, currentPastGrids, currentPastGridsIndex)
+        self.SwapIndexes(currentGrid, wallHeights, currentIndex, currentPastGrids, currentPastGridsIndex)
         print(currentIndex)
         currentIndex -= 1
         print(wallHeights)
@@ -26,7 +26,7 @@ class IntersectionSort(AbstractStrategy):
     print(wallHeights)
 
 
-  def SwapIndexes(self, currentGrid, wallHeights, currentIndex, gridSize, currentPastGrids, currentPastGridsIndex):
+  def SwapIndexes(self, currentGrid, wallHeights, currentIndex, currentPastGrids, currentPastGridsIndex):
     #swap list indecies
     indexToBeSwapped = wallHeights[currentIndex]
     wallHeights[currentIndex] = wallHeights[currentIndex - 1]

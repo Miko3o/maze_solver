@@ -21,7 +21,7 @@ class SelectionSort(AbstractStrategy):
           minHeight = nextIndex
 
       #STEP 3: swap the minimum with the first index
-      self.SwapIndexes(currentGrid, wallHeights, i, minHeight, gridSize, currentPastGrids, currentPastGridsIndex)
+      self.SwapIndexes(currentGrid, wallHeights, i, minHeight, currentPastGrids, currentPastGridsIndex)
 
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -33,7 +33,7 @@ class SelectionSort(AbstractStrategy):
     print(wallHeights)
 
 
-  def SwapIndexes(self, currentGrid, wallHeights, currentIndex, minHeight, gridSize, currentPastGrids, currentPastGridsIndex):
+  def SwapIndexes(self, currentGrid, wallHeights, currentIndex, minHeight, currentPastGrids, currentPastGridsIndex):
     #swap list indecies
     indexToBeSwapped = wallHeights[currentIndex]
     wallHeights[currentIndex] = wallHeights[minHeight]
