@@ -14,8 +14,8 @@ class BubbleSort(AbstractStrategy):
     for i in range(len(wallHeights)):
       for currentIndex in range(len(wallHeights) - 1):
         if wallHeights[currentIndex] > wallHeights[currentIndex + 1]:
-          self.SwapIndexes(currentGrid, wallHeights, currentIndex, gridSize, currentPastGrids, currentPastGridsIndex)
-      for event in pygame.event.get():      
+          self.SwapIndexes(currentGrid, wallHeights, currentIndex, currentPastGrids)
+      for event in pygame.event.get():
         if event.type == pygame.QUIT:
           pygame.quit()
           exit()
@@ -23,19 +23,19 @@ class BubbleSort(AbstractStrategy):
       clock.tick(10)
     print(wallHeights)
 
-  def SwapIndexes(self, currentGrid, wallHeights, currentIndex, gridSize, currentPastGrids, currentPastGridsIndex):
-      #swap list indecies
-      indexToBeSwapped = wallHeights[currentIndex]
-      wallHeights[currentIndex] = wallHeights[currentIndex + 1]
-      wallHeights[currentIndex + 1] = indexToBeSwapped
-      
-      #swap grid indecies
-      for gridRow in range(len(currentGrid)):
-          gridIndexToBeSwapped = currentGrid[gridRow][currentIndex]
-          currentGrid[gridRow][currentIndex] = currentGrid[gridRow][currentIndex + 1]
-          currentGrid[gridRow][currentIndex + 1] = gridIndexToBeSwapped
-
-      self.viewManager.modelManager.gridMetaData.ChangeGridData(currentGrid, False, False, False)
-      self.viewManager.uiGrid.Draw(currentGrid, currentPastGrids, 0, 0, go.NOTHING, 1)
-
+  def SwapIndexes(self, currentGrid, wallHeights, currentIndex, currentPastGrids):
+    #swap list indecies
+    indexToBeSwapped = wallHeights[currentIndex]
+    wallHeights[currentIndex] = wallHeights[currentIndex + 1]
+    wallHeights[currentIndex + 1] = indexToBeSwapped
     
+    #swap grid indecies
+    for gridRow in range(len(currentGrid)):
+        gridIndexToBeSwapped = currentGrid[gridRow][currentIndex]
+        currentGrid[gridRow][currentIndex] = currentGrid[gridRow][currentIndex + 1]
+        currentGrid[gridRow][currentIndex + 1] = gridIndexToBeSwapped
+
+    self.viewManager.modelManager.gridMetaData.ChangeGridData(currentGrid, False, False, False)
+    self.viewManager.uiGrid.Draw(currentGrid, currentPastGrids, 0, 0, go.NOTHING, 1)
+
+  
