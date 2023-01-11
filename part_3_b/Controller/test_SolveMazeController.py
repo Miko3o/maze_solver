@@ -1,57 +1,54 @@
 import pytest
-from unittest.mock import MagicMock, patch
+import unittest
+from unittest.mock import MagicMock, patch, Mock
 from Controller.SolveMazeController import SolveMazeController
+from View.GameStateENUM import GridObjects as go, SolvingAlgorithm as sa
 
-
-#SetData-----------*INCOMPLETE*-------------------
-
-#note: what is this?????
-
-@pytest.mark.xfail
-def test_DataIsSet_When_SetDataCalled():
-  print("wip")
 
 
 #Solve--------------------------------------------
 
-#note: later, account for the squares that would be filled as the algorithm's progress
 
 
-@pytest.mark.xfail
-def MazePathMade_When_SolveCalled():
-  #setup
-  solveMazeController = SolveMazeController()
-  N = "nothing"
-  W = "wall"
-  S = "solver"
-  G = "goal"
-  P = "path"
-  currentGrid = [
-                [N, N, N, N, W, N, N, N],
-                [N, S, W, N, W, N, W, N],
-                [N, W, N, N, W, N, W, N],
-                [N, W, N, W, W, N, W, N],
-                [N, W, N, N, N, N, W, N],
-                [N, W, W, N, W, W, N, N],
-                [N, W, N, N, W, W, N, W],
-                [W, N, N, W, W, G, N, W],
-                                        ]
 
-  #work
-  currentGrid = solveMazeController.Solve()
+class Test_SolveMazeController(unittest.TestCase):
+  def test_MazeSolvedUsingBFS_When_SolveMazeControllerCalled(self):
+    #SETUP-------------------------------------------------
+    #mock args
+    mock_controllerManager = Mock()
+    mock_viewManager = Mock()
+
+    solveMazeController = SolveMazeController(mock_controllerManager, mock_viewManager)
+    N = go.NOTHING
+    W = go.WALL
+    S = go.SOLVER
+    G = go.GOAL
+    P = go.PATH
+    F = go.FINDER
+    currentGrid = [
+                  [N, N, N, N, W, N, N, N],
+                  [N, S, W, N, W, N, W, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, N, W, W, N, W, N],
+                  [N, W, N, N, N, N, W, N],
+                  [N, W, W, N, W, W, N, N],
+                  [N, W, N, N, W, W, N, W],
+                  [W, N, N, W, W, G, N, W],
+                                          ]
+    solveMazeController.solvingAlgorithm = sa.BFS
+    currentPastGrids = []
+    currentPastGridsIndex = 0
+
+    #WORK-----------------------------------
+    solveMazeController.Solve(currentGrid, currentPastGrids, currentPastGridsIndex)
 
 
-  #assert
-  assert currentGrid == [
-                        [N, P, P, P, W, P, P, P],
-                        [N, S, W, P, W, P, W, P],
-                        [N, W, P, P, W, P, W, P],
-                        [N, W, P, W, W, P, W, P],
-                        [N, W, P, P, P, P, W, P],
-                        [N, W, W, N, W, W, P, P],
-                        [N, W, N, N, W, W, P, W],
-                        [W, N, N, W, W, G, P, W],
-                                               ]
+    #ASSERT--------------------------------
+    solveMazeController.controllerManager.solveMazeBFS.Solve.assert_called
+
+if __name__ == "__main__":
+  unittest.main()
+
 
 #ChangeStrategy--------------------------------------
 

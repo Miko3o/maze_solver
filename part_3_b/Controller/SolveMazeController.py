@@ -8,8 +8,6 @@ class SolveMazeController():
     self.viewManager = viewManager
     self.solvingAlgorithm = sa.BFS
 
-  def SetData(self):
-    print("wip")
 
   def Solve(self, currentGrid, currentPastGrids, currentPastGridsIndex):
     if self.solvingAlgorithm == sa.BFS:

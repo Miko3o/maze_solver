@@ -1,39 +1,46 @@
 import pytest
-from unittest.mock import MagicMock, patch
+import unittest
+from unittest.mock import MagicMock, patch, Mock
 from Controller.GridController import GridController
-
+from View.GameStateENUM import GridObjects as go
 
 #ResizeGrid-------------------------------------------
 
-@pytest.mark.xfail
-def test_GridIsResized_When_ResizeGridCalled():
-  #setup
-  gridController = GridController()
-  N = "none"
-  currentGrid = [
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                                        ]
+class Test_GridController(unittest.TestCase):
+  def test_GridIsResized_When_ResizeGridCalled(self):
+    #SETUP--------------------------------------
+    gridController = GridController()
+    N = go.NOTHING
+    currentGrid = [
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                                          ]
+    sliderX = 510
+    gridSize = 8
 
-  #work
-  currentGrid = gridController.ResizeGrid(9, 9)
+    #WORK------------------------------------
+    gridController.ResizeGrid(sliderX, currentGrid, gridSize)
 
-  
-  #assert
-  assert currentGrid == [
-                        [N, N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N, N],
-                                                  ]
+    
+    #ASSERT-----------------------------------
+    assert currentGrid == [
+                          [N, N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N, N],
+                                                    ]
+    
+
+if __name__ == "__main__":
+  unittest.main()
