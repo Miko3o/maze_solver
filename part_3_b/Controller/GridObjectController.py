@@ -66,13 +66,6 @@ class GridObjectController():
     print("pastGrids index:", pastGrids.index(indexItem) + 1)
     return pastGrids.index(indexItem) + 1
 
-  
-  def ChangeGridObject(self):
-    print("ChangeGridObject: wip")
-
-  def GetAllGridObjects(self):
-    print("GetAllGridObjects: wip")
-
 
 
   #HANDLERS---------------------------------------------------------------

@@ -1,39 +1,53 @@
 import pytest
-from unittest.mock import MagicMock, patch
+import unittest
+from unittest.mock import MagicMock, patch, Mock
 from Controller.GravityController import GravityController
+from View.GameStateENUM import GridObjects as go
 
 
-#Gravity----------------------------------------
+class Test_GravityCOntroller(unittest.TestCase):
+  @patch("pygame.event.get")
+  @patch("pygame.display.update")
+  def test_BlocksAreFallen_When_GravityCOntrollerCalled(self, mock_pygameDisplayUpdate, mock_pygameEventGet):
+    #SETUP-------------------------------------
+    #mock functions
+    mock_pygameDisplayUpdate.return_value = "hi"
+    mock_pygameEventGet.return_value = []
 
-@pytest.mark.xfail
-def test_BlocksAreFallen_When_GravityControllerCalled():
-  #setup
-  gravityController = GravityController()
-  N = "nothing"
-  W = "wall"
-  
-  currentGrid = [
-                [W, N, N, N, N, N, W, N],
-                [W, N, N, N, N, N, N, N],
-                [N, N, N, N, W, N, N, N],
-                [N, N, N, N, N, N, W, N],
-                [N, N, N, N, W, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, W, N, N, N],
-                [N, N, N, N, N, N, N, N],
-                                        ]
+    #mock args
+    mock_viewManager = Mock()
 
-  #work
-  currentGrid = gravityController.Gravity()
+    gravityController = GravityController(mock_viewManager)
+    N = go.NOTHING
+    W = go.WALL
+    
+    currentGrid = [
+                  [W, N, N, N, N, N, W, N],
+                  [W, N, N, N, N, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, N, N, W, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, N, N, N, N],
+                                          ]
 
-  #assert
-  assert currentGrid == [
-                        [N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N],
-                        [N, N, N, N, N, N, N, N],
-                        [N, N, N, N, W, N, N, N],
-                        [W, N, N, N, W, N, W, N],
-                        [W, N, N, N, W, N, W, N],
-                                                ]
+    #WORK--------------------------------------
+    gravityController.Gravity(currentGrid)
+
+    #ASSERT----------------------------------------
+    assert currentGrid == [
+                          [N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N],
+                          [N, N, N, N, N, N, N, N],
+                          [N, N, N, N, W, N, N, N],
+                          [W, N, N, N, W, N, W, N],
+                          [W, N, N, N, W, N, W, N],
+                                                  ]
+
+
+if __name__ == "__main__":
+  unittest.main()
+
