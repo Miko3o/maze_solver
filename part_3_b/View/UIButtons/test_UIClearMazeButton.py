@@ -1,7 +1,7 @@
 import pytest
 import unittest
 from unittest.mock import MagicMock, patch, Mock
-from View.UIButtons.UISaveButton import UISaveButton
+from View.UIButtons.UIClearMazeButton import UIClearMazeButton
 
 
 #Draw------------------------------------------------
@@ -10,32 +10,32 @@ from View.UIButtons.UISaveButton import UISaveButton
 @patch("pygame.font.SysFont")
 @patch("pygame.draw.lines")
 @patch("pygame.draw.rect")
-class Test_UISaveButton(unittest.TestCase):
+class Test_UIClearMazeButton(unittest.TestCase):
   def test_ButtonIsDrawnWithProperties_When_DrawCalled(self, mock_pygameDrawRect, mock_pygameDrawLines, mock_pygameFontSysFont, mock_pygameSurface, mock_pygameMouseGetPressed):
     #SETUP------------------------------------------------------
     #mock class args
     mock_viewManager = Mock()
 
     #button properties args
-    buttonColor = [255, 150, 173]
-    buttonOutlineColor = (139, 49, 73)
-    buttonText = "Save"
-    buttonWidth = 75
+    buttonColor = [255, 247, 98]
+    buttonOutlineColor = (190, 181, 17)
+    buttonText = "Clear Maze"
+    buttonWidth = 180
     buttonHeight = 30
-    displayX = 130
+    displayX = 260
     displayY = 17
 
     #draw function args
-    mouseX = 131
+    mouseX = 261
     mouseY = 18
     color = tuple(buttonColor)
 
     #button class
-    uISaveButton = UISaveButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
-    uISaveButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
+    uiClearMazeButton = UIClearMazeButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
+    uiClearMazeButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
 
     #WORK-------------------------------------
-    uISaveButton.Draw(mouseX, mouseY)
+    uiClearMazeButton.Draw(mouseX, mouseY)
 
     #ASSERT------------------------------------
     mock_pygameDrawRect.assert_called_with(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
@@ -48,32 +48,32 @@ class Test_UISaveButton(unittest.TestCase):
     mock_viewManager = Mock()
 
     #button properties args
-    buttonColor = [255, 150, 173]
-    buttonOutlineColor = (139, 49, 73)
-    buttonText = "Save"
-    buttonWidth = 75
+    buttonColor = [255, 247, 98]
+    buttonOutlineColor = (190, 181, 17)
+    buttonText = "Clear Maze"
+    buttonWidth = 180
     buttonHeight = 30
-    displayX = 130
+    displayX = 260
     displayY = 17
 
     #draw function args
-    mouseX = 131
+    mouseX = 261
     mouseY = 18
     color = tuple(buttonColor)
     mock_pygameMouseGetPressed[0].return_value = 1
 
     #button class
-    uISaveButton = UISaveButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
-    uISaveButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
+    uiClearMazeButton = UIClearMazeButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
+    uiClearMazeButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
 
     #button method
-    uISaveButton.rect.collidepoint.return_value = True
+    uiClearMazeButton.rect.collidepoint.return_value = True
 
     #WORK-------------------------------------
-    uISaveButton.ClickButton(mouseX, mouseY)
+    uiClearMazeButton.ClickButton(mouseX, mouseY)
 
     #ASSERT------------------------------------
-    assert uISaveButton.clicked == True
+    assert uiClearMazeButton.clicked == True
 
   #unclick button-----------------------------------------
   def test_ButtonIsUnclickedWithProperties_When_UnclickButtonCalled(self, mock_pygameDrawRect, mock_pygameDrawLines, mock_pygameFontSysFont, mock_pygameSurface, mock_pygameMouseGetPressed):
@@ -102,15 +102,15 @@ class Test_UISaveButton(unittest.TestCase):
     mock_pygameMouseGetPressed[0].return_value = 0
 
     #button class
-    uISaveButton = UISaveButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
-    uISaveButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
-    uISaveButton.clicked = True
+    uiClearMazeButton = UIClearMazeButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
+    uiClearMazeButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
+    uiClearMazeButton.clicked = True
 
     #WORK-------------------------------------
-    uISaveButton.UnclickButton(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+    uiClearMazeButton.UnclickButton(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex, gameState)
 
     #ASSERT------------------------------------
-    assert uISaveButton.clicked == False
+    assert uiClearMazeButton.clicked == False
 
 
 if __name__ == "__main__":
