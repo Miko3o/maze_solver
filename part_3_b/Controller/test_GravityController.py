@@ -5,7 +5,7 @@ from Controller.GravityController import GravityController
 from View.GameStateENUM import GridObjects as go
 
 
-class Test_GravityCOntroller(unittest.TestCase):
+class Test_GravityController(unittest.TestCase):
   @patch("pygame.event.get")
   @patch("pygame.display.update")
   def test_BlocksAreFallen_When_GravityCOntrollerCalled(self, mock_pygameDisplayUpdate, mock_pygameEventGet):
