@@ -24,5 +24,3 @@ class SolveMazeController():
     self.solvingAlgorithm = newStrategy
     print("newStrategy:", self.solvingAlgorithm)
 
-  def GetAllStrategies(self):
-    print("wip")

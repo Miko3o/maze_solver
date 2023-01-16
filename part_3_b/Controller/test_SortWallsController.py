@@ -1,76 +1,215 @@
 import pytest
-from unittest.mock import MagicMock, patch
+import unittest
+from unittest.mock import MagicMock, patch, Mock
 from Controller.SortWallsController import SortWallsController
+from View.GameStateENUM import GridObjects as go, SortingAlgorithm as sra
 
 
-#SetData-----------*INCOMPLETE*-------------------
+class Test_SortWallsController(unittest.TestCase):
+  def test_WallsSortedUsingBubbleSort_When_SortWallsControllerCalled(self):
+    #SETUP-------------------------------------------------
+    #mock args
+    mock_controllerManager = Mock()
+    mock_viewManager = Mock()
 
-#note: what is this?????
+    sortWallsController = SortWallsController(mock_controllerManager, mock_viewManager)
+    N = go.NOTHING
+    W = go.WALL
+    currentGrid = [
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, W, W, W, W, W, W],
+                  [W, W, W, W, W, W, W, W],
+                                          ]
+    sortWallsController.sortingAlgorithm = sra.BubbleSort
+    gridSize = 8
+    currentPastGrids = []
+    currentPastGridsIndex = 0
 
-@pytest.mark.xfail
-def test_DataIsSet_When_SetDataCalled():
-  print("wip")
-
-
-#Sort--------------------------------------------
-
-
-
-@pytest.mark.xfail
-def WallsAreSorted_When_SortCalled():
-  #setup
-  sortWallsController = SortWallsController()
-  N = "nothing"
-  W = "wall"
-  currentGrid = [
-                [N, N, N, N, N, N, N, N],
-                [N, N, N, N, W, N, N, N],
-                [N, N, N, N, W, N, N, N],
-                [N, W, N, N, W, N, N, N],
-                [N, W, N, N, W, N, W, N],
-                [N, W, N, N, W, N, W, N],
-                [N, W, W, W, W, W, W, W],
-                [W, W, W, W, W, W, W, W],
-                                        ]
-
-  #work
-  currentGrid = sortWallsController.Sort()
+    #WORK-----------------------------------
+    sortWallsController.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
 
 
-  #assert
-  assert   currentGrid == [
-                          [N, N, N, N, N, N, N, N],
-                          [N, N, N, N, N, N, N, W],
-                          [N, N, N, N, N, N, N, W],
-                          [N, N, N, N, N, N, W, W],
-                          [N, N, N, N, N, W, W, W],
-                          [N, N, N, N, N, W, W, W],
-                          [N, W, W, W, W, W, W, W],
-                          [W, W, W, W, W, W, W, W],
-                                                  ]
+    #ASSERT--------------------------------
+    sortWallsController.controllerManager.bubbleSort.Sort.assert_called
 
-#ChangeStrategy--------------------------------------
+  def test_WallsSortedUsingIntersectionSort_When_SortWallsControllerCalled(self):
+    #SETUP-------------------------------------------------
+    #mock args
+    mock_controllerManager = Mock()
+    mock_viewManager = Mock()
 
-@pytest.mark.xfail
-def StrategyIsChanged_When_ChangeStrategiesCalled():
-  #setup
-  sortWallsController = SortWallsController()
-  currentStrategy = "Bubble Sort"
+    sortWallsController = SortWallsController(mock_controllerManager, mock_viewManager)
+    N = go.NOTHING
+    W = go.WALL
+    currentGrid = [
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, W, W, W, W, W, W],
+                  [W, W, W, W, W, W, W, W],
+                                          ]
+    sortWallsController.sortingAlgorithm = sra.IntersectionSort
+    gridSize = 8
+    currentPastGrids = []
+    currentPastGridsIndex = 0
 
-  #work
-  currentStrategy = sortWallsController.ChangeStrategy
-
-  #assert
-  assert currentStrategy == "Radix Sort"
+    #WORK-----------------------------------
+    sortWallsController.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
 
 
-#GetAllStrategies-------*INCOMPLETE*--------(dropdown)
+    #ASSERT--------------------------------
+    sortWallsController.controllerManager.intersectionSort.Sort.assert_called
 
-@pytest.mark.xfail
-def StrategiesAreDisplayed_When_GetAllStrategiesCalled():
+  def test_WallsSortedUsingMergeSort_When_SortWallsControllerCalled(self):
+    #SETUP-------------------------------------------------
+    #mock args
+    mock_controllerManager = Mock()
+    mock_viewManager = Mock()
 
-  #note: also forgot what this does
-  
-  #setup
-  sortWallsController = SortWallsController()
-  print("wip")
+    sortWallsController = SortWallsController(mock_controllerManager, mock_viewManager)
+    N = go.NOTHING
+    W = go.WALL
+    currentGrid = [
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, W, W, W, W, W, W],
+                  [W, W, W, W, W, W, W, W],
+                                          ]
+    sortWallsController.sortingAlgorithm = sra.MergeSort
+    gridSize = 8
+    currentPastGrids = []
+    currentPastGridsIndex = 0
+
+    #WORK-----------------------------------
+    sortWallsController.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+
+
+    #ASSERT--------------------------------
+    sortWallsController.controllerManager.mergeSort.Sort.assert_called
+
+  def test_WallsSortedUsingQuickSortSort_When_SortWallsControllerCalled(self):
+    #SETUP-------------------------------------------------
+    #mock args
+    mock_controllerManager = Mock()
+    mock_viewManager = Mock()
+
+    sortWallsController = SortWallsController(mock_controllerManager, mock_viewManager)
+    N = go.NOTHING
+    W = go.WALL
+    currentGrid = [
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, W, W, W, W, W, W],
+                  [W, W, W, W, W, W, W, W],
+                                          ]
+    sortWallsController.sortingAlgorithm = sra.QuickSort
+    gridSize = 8
+    currentPastGrids = []
+    currentPastGridsIndex = 0
+
+    #WORK-----------------------------------
+    sortWallsController.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+
+
+    #ASSERT--------------------------------
+    sortWallsController.controllerManager.quickSort.Sort.assert_called
+
+  def test_WallsSortedUsingRadixSort_When_SortWallsControllerCalled(self):
+    #SETUP-------------------------------------------------
+    #mock args
+    mock_controllerManager = Mock()
+    mock_viewManager = Mock()
+
+    sortWallsController = SortWallsController(mock_controllerManager, mock_viewManager)
+    N = go.NOTHING
+    W = go.WALL
+    currentGrid = [
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, W, W, W, W, W, W],
+                  [W, W, W, W, W, W, W, W],
+                                          ]
+    sortWallsController.sortingAlgorithm = sra.RadixSort
+    gridSize = 8
+    currentPastGrids = []
+    currentPastGridsIndex = 0
+
+    #WORK-----------------------------------
+    sortWallsController.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+
+
+    #ASSERT--------------------------------
+    sortWallsController.controllerManager.radixSort.Sort.assert_called
+
+  def test_WallsSortedUsingSelectionSort_When_SortWallsControllerCalled(self):
+    #SETUP-------------------------------------------------
+    #mock args
+    mock_controllerManager = Mock()
+    mock_viewManager = Mock()
+
+    sortWallsController = SortWallsController(mock_controllerManager, mock_viewManager)
+    N = go.NOTHING
+    W = go.WALL
+    currentGrid = [
+                  [N, N, N, N, N, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, N, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, N, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, N, N, W, N, W, N],
+                  [N, W, W, W, W, W, W, W],
+                  [W, W, W, W, W, W, W, W],
+                                          ]
+    sortWallsController.sortingAlgorithm = sra.SelectionSort
+    gridSize = 8
+    currentPastGrids = []
+    currentPastGridsIndex = 0
+
+    #WORK-----------------------------------
+    sortWallsController.Sort(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+
+
+    #ASSERT--------------------------------
+    sortWallsController.controllerManager.selecetionSort.Sort.assert_called
+
+
+
+  #ChangeStrategy--------------------------------------
+  def test_StrategyIsChangedToIntersection_When_ChangeStrategiesCalled(self):
+    #SETUP-------------------------------------------------
+    #mock args
+    mock_controllerManager = Mock()
+    mock_viewManager = Mock()
+
+    sortWallsController = SortWallsController(mock_controllerManager, mock_viewManager)
+    sortWallsController.sortingAlgorithm = sra.BubbleSort
+    newStrategy = sra.IntersectionSort
+
+    #WORK----------------------------------
+    sortWallsController.ChangeStrategy(newStrategy)
+
+    #ASSERT----------------------------------
+    assert sortWallsController.sortingAlgorithm == sra.IntersectionSort
+
+if __name__ == "__main__":
+  unittest.main()

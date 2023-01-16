@@ -8,8 +8,6 @@ class SortWallsController():
     self.viewManager = viewManager
     self.sortingAlgorithm = sra.BubbleSort
 
-  def SetData(self):
-    print("wip")
 
   def Sort(self, currentGrid, gridSize, currentPastGrids, currentPastGridsIndex):
     if self.sortingAlgorithm == sra.BubbleSort:
@@ -28,6 +26,3 @@ class SortWallsController():
   def ChangeStrategy(self, newStrategy):
     self.sortingAlgorithm = newStrategy
     print("newStrategy:", self.sortingAlgorithm)
-
-  def GetAllStrategies(self):
-    print("wip")
