@@ -1,7 +1,7 @@
 import pytest
 import unittest
 from unittest.mock import MagicMock, patch, Mock
-from View.UIButtons.UIRedoButton import UIRedoButton
+from View.UIDropdownButtons.SelectGridObjectDropdown import SelectGridObjectDropdown
 
 
 #Draw------------------------------------------------
@@ -10,32 +10,31 @@ from View.UIButtons.UIRedoButton import UIRedoButton
 @patch("pygame.font.SysFont")
 @patch("pygame.draw.lines")
 @patch("pygame.draw.rect")
-class Test_UIRedoButton(unittest.TestCase):
+class Test_SelectGridObjectDropdown(unittest.TestCase):
   def test_ButtonIsDrawnWithProperties_When_DrawCalled(self, mock_pygameDrawRect, mock_pygameDrawLines, mock_pygameFontSysFont, mock_pygameSurface, mock_pygameMouseGetPressed):
     #SETUP------------------------------------------------------
     #mock class args
     mock_viewManager = Mock()
 
     #button properties args
-    buttonColor = [125, 255, 203]
-    buttonOutlineColor = (56, 128, 93)
-    buttonText = ">"
-    buttonWidth = 30
+    buttonColor = [230, 230, 230]
+    buttonText = "Select Object"
+    buttonWidth = 120
     buttonHeight = 30
-    displayX = 540
-    displayY = 17
+    displayX = 30
+    displayY = 80
 
     #draw function args
-    mouseX = 541
-    mouseY = 18
+    mouseX = 31
+    mouseY = 81
     color = tuple(buttonColor)
 
     #button class
-    uIRedoButton = UIRedoButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
-    uIRedoButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
+    selectGridObjectDropdown = SelectGridObjectDropdown(mock_pygameSurface, buttonColor, buttonText, buttonWidth, buttonHeight, displayX, displayY, mock_viewManager)
+    selectGridObjectDropdown.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
 
     #WORK-------------------------------------
-    uIRedoButton.Draw(mouseX, mouseY)
+    selectGridObjectDropdown.Draw(mouseX, mouseY)
 
     #ASSERT------------------------------------
     mock_pygameDrawRect.assert_called_with(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
@@ -48,32 +47,31 @@ class Test_UIRedoButton(unittest.TestCase):
     mock_viewManager = Mock()
 
     #button properties args
-    buttonColor = [226, 128, 241]
-    buttonOutlineColor = (150, 54, 165)
-    buttonText = "GRAVITY"
-    buttonWidth = 100
-    buttonHeight = 70
-    displayX = 472
-    displayY = 150
+    buttonColor = [230, 230, 230]
+    buttonText = "Select Object"
+    buttonWidth = 120
+    buttonHeight = 30
+    displayX = 30
+    displayY = 80
 
     #draw function args
-    mouseX = 472
-    mouseY = 150
+    mouseX = 31
+    mouseY = 81
     color = tuple(buttonColor)
     mock_pygameMouseGetPressed.return_value = [1]
 
     #button class
-    uIRedoButton = UIRedoButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
-    uIRedoButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
+    selectGridObjectDropdown = SelectGridObjectDropdown(mock_pygameSurface, buttonColor, buttonText, buttonWidth, buttonHeight, displayX, displayY, mock_viewManager)
+    selectGridObjectDropdown.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
 
     #button method
-    uIRedoButton.rect.collidepoint.return_value = True
+    selectGridObjectDropdown.rect.collidepoint.return_value = True
 
     #WORK-------------------------------------
-    uIRedoButton.ClickButton(mouseX, mouseY)
+    selectGridObjectDropdown.ClickButton(mouseX, mouseY)
 
     #ASSERT------------------------------------
-    assert uIRedoButton.clicked == True
+    assert selectGridObjectDropdown.clicked == True
 
   #unclick button-----------------------------------------
   def test_ButtonIsUnclickedWithProperties_When_UnclickButtonCalled(self, mock_pygameDrawRect, mock_pygameDrawLines, mock_pygameFontSysFont, mock_pygameSurface, mock_pygameMouseGetPressed):
@@ -102,15 +100,15 @@ class Test_UIRedoButton(unittest.TestCase):
     mock_pygameMouseGetPressed.return_value = [0]
 
     #button class
-    uIRedoButton = UIRedoButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
-    uIRedoButton.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
-    uIRedoButton.clicked = True
+    selectGridObjectDropdown = SelectGridObjectDropdown(mock_pygameSurface, buttonColor, buttonText, buttonWidth, buttonHeight, displayX, displayY, mock_viewManager)
+    selectGridObjectDropdown.rect = mock_pygameDrawRect(mock_pygameSurface, (color), [displayX, displayY, buttonWidth, buttonHeight])
+    selectGridObjectDropdown.clicked = True
 
     #WORK-------------------------------------
-    uIRedoButton.UnclickButton(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
+    selectGridObjectDropdown.UnclickButton(currentGrid, gridSize, currentPastGrids, currentPastGridsIndex)
 
     #ASSERT------------------------------------
-    assert uIRedoButton.clicked == False
+    assert selectGridObjectDropdown.clicked == False
 
 
 if __name__ == "__main__":

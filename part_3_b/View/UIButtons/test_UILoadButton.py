@@ -60,7 +60,7 @@ class Test_UILoadButton(unittest.TestCase):
     mouseX = 31
     mouseY = 18
     color = tuple(buttonColor)
-    mock_pygameMouseGetPressed[0].return_value = 1
+    mock_pygameMouseGetPressed.return_value = [1]
 
     #button class
     uiLoadButton = UILoadButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
@@ -99,7 +99,7 @@ class Test_UILoadButton(unittest.TestCase):
 
     #draw function args
     color = tuple(buttonColor)
-    mock_pygameMouseGetPressed[0].return_value = 0
+    mock_pygameMouseGetPressed.return_value = [0]
 
     #button class
     uiLoadButton = UILoadButton(mock_pygameSurface, mock_viewManager, buttonColor, buttonOutlineColor, buttonText, buttonWidth, buttonHeight, displayX, displayY)
