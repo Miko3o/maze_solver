@@ -11,7 +11,10 @@ class UIFinder(AbstractUISquare):
 
   def Draw(self, gameWindow, currentGrid, gridRow, square, lineStartPositionx, lineStartPositiony, distanceBetweenRows):
     if currentGrid[gridRow][square] == go.FINDER:
-      returnValue = super().Draw(gameWindow, self.color, lineStartPositionx, lineStartPositiony, distanceBetweenRows)
+      if square == 0:
+        returnValue = super().Draw(gameWindow, self.color, lineStartPositionx, lineStartPositiony, distanceBetweenRows)
+      else:
+        returnValue = super().Draw(gameWindow, self.color, lineStartPositionx + distanceBetweenRows, lineStartPositiony, distanceBetweenRows)
       return returnValue
     else:
       return 0, 0

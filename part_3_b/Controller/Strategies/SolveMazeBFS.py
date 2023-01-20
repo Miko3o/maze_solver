@@ -38,8 +38,9 @@ class SolveMazeBFS(AbstractStrategy):
       print("popped node:", poppedNode)
       for neighbor in neighboringNodes:
         if neighbor[0] < len(currentGrid) and neighbor[1] < len(currentGrid) and neighbor[0] > -1 and neighbor[1] > -1:
+          print("neighbor:", neighbor, currentGrid[neighbor[1]][neighbor[0]])
           if neighbor not in visited and currentGrid[neighbor[1]][neighbor[0]] == go.NOTHING:
-            print("neighbor:", neighbor)
+            #print("neighbor:", neighbor, currentGrid[neighbor[1]][neighbor[0]])
             visited.append(neighbor)
             origin.append(poppedNode)
             queue.append(neighbor)
@@ -86,13 +87,15 @@ class SolveMazeBFS(AbstractStrategy):
 
   def DrawFinderSquaresHandler(self, currentGrid, gameWindow, neighbor):
 
-    positions = [160 + (neighbor[0]*(280/len(currentGrid))), 60 + (neighbor[1]*(280/len(currentGrid))), 280/len(currentGrid), 280/len(currentGrid)]
-    pygame.draw.rect(gameWindow, square["finder"]["color"], positions)
+    self.viewManager.uiGrid.Draw(currentGrid, [], 0, 0, go.NOTHING, 1)
+    #positions = [160 + (neighbor[0]*(280/len(currentGrid))), 60 + (neighbor[1]*(280/len(currentGrid))), 280/len(currentGrid), 280/len(currentGrid)]
+    #pygame.draw.rect(gameWindow, square["finder"]["color"], positions)
 
   def DrawPathBackSquaresHandler(self, currentGrid, gameWindow, currentNode):
 
-    positions = [160 + (currentNode[0]*(280/len(currentGrid))), 60 + (currentNode[1]*(280/len(currentGrid))), 280/len(currentGrid), 280/len(currentGrid)]
-    pygame.draw.rect(gameWindow, square["path"]["color"], positions)
+    self.viewManager.uiGrid.Draw(currentGrid, [], 0, 0, go.NOTHING, 1)
+    #positions = [160 + (currentNode[0]*(280/len(currentGrid))), 60 + (currentNode[1]*(280/len(currentGrid))), 280/len(currentGrid), 280/len(currentGrid)]
+    #pygame.draw.rect(gameWindow, square["path"]["color"], positions)
 
 
   def BackTrack(self, currentGrid, poppedNode, neighbor, visited, origin, gameWindow):

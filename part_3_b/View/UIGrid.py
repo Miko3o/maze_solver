@@ -105,9 +105,13 @@ class UIGrid():
           #draw square
           lineStartPositionxANDIndexSquareTuple = squareMethod.Draw(self.gameWindow, currentGrid, gridRow, square, lineStartPositionx, lineStartPositiony, distanceBetweenRows)
           lineStartPositionxANDIndexSquare = list(lineStartPositionxANDIndexSquareTuple)
-          #print(lineStartPositionxANDIndexSquare[0])
-          lineStartPositionx += lineStartPositionxANDIndexSquare[0]
-          #lineStartPositionx = 160 + (square*distanceBetweenRows)
+          #if squareMethod == self.uiWall:
+            #print("squareMethod:", squareMethod)
+            #print("square:", square)
+            #print("tuple index 0:", lineStartPositionxANDIndexSquare[0])
+            #print("distance:", distanceBetweenRows)
+          #lineStartPositionx += lineStartPositionxANDIndexSquare[0]
+          lineStartPositionx = 160 + (square*distanceBetweenRows)
           
           #click square
           self.currentGridIndex = (gridRow, square)
