@@ -57,6 +57,7 @@ class GridObjectController():
       print("pastGrids length:", len(pastGrids))
       currentPastGridsIndex = -1
       print("pastGrids index:", currentPastGridsIndex)
+      print("realIndex:", currentPastGridsIndex % len(pastGrids))
       print("rangeBetweenPastGridsIndexAndLength:", rangeBetweenPastGridsIndexAndLength)
     self.viewManager.modelManager.gridMetaData.ChangeGridData(self.currentGrid, False, pastGrids, currentPastGridsIndex)
 
