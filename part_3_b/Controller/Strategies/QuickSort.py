@@ -29,7 +29,7 @@ class QuickSort(AbstractStrategy):
   def Partition(self, currentGrid, wallHeights, low, high, gridSize, currentPastGrids, currentPastGridsIndex):
     clock = pygame.time.Clock()
     #set the index of the pivot to be switched with the highest index
-    pivotToSwitch = randint(low, high)
+    pivotToSwitch = self.GetRandInt(low, high)
     print("pivot to switch:", pivotToSwitch)
     print("high:", high)
     #swap the pivot with the highest index
@@ -72,6 +72,9 @@ class QuickSort(AbstractStrategy):
 
     #return leftwall
     return leftWall
+
+  def GetRandInt(low, high):
+    return randint(low, high)
 
 
 

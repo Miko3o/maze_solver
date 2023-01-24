@@ -105,9 +105,10 @@ class Test_QuickSort(unittest.TestCase):
                                                   ]
 
   #Partition--------------------------------------------
+  @patch("Controller.Strategies.QuickSort.QuickSort.GetRandInt")
   @patch("pygame.display.update")
   @patch("pygame.event.get")
-  def test_PivotLocationFound_When_PartitionCalled(self, mock_pygameEventGet, mock_pygameDisplayUpdate):
+  def test_PivotLocationFound_When_PartitionCalled(self, mock_pygameEventGet, mock_pygameDisplayUpdate, mock_randint):
     #SETUP----------------------------------
     #mocking arg objects
     mock_viewManager = Mock()
@@ -116,6 +117,7 @@ class Test_QuickSort(unittest.TestCase):
     #mock function return value
     mock_pygameEventGet.return_value = []
     mock_pygameDisplayUpdate.return_value = "hi"
+    mock_randint.return_value = 1
 
 
 
