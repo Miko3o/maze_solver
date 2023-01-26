@@ -2,6 +2,7 @@ import pytest
 import unittest
 from unittest.mock import MagicMock, patch, Mock
 from Controller.UndoController import UndoController
+from View.GameStateENUM import GridObjects as go
 
 class Test_UndoController(unittest.TestCase):
 
@@ -10,12 +11,11 @@ class Test_UndoController(unittest.TestCase):
     #setup
     viewManager = Mock()
     undoController = UndoController(viewManager)
-    N = "nothing"
-    W = "wall"
-    pastGridsQuantity = 3
+    N = go.NOTHING
+    W = go.WALL
     currentPastGridsIndex = -1
     currentGrid = [
-                  [W, W, W, W, W, N, N, N],
+                  [W, W, W, W, N, N, N, N],
                   [N, N, N, N, N, N, N, N],
                   [N, N, N, N, N, N, N, N],
                   [N, N, N, N, N, N, N, N],
@@ -56,10 +56,9 @@ class Test_UndoController(unittest.TestCase):
                                           ]]
 
     #work
-    newGrid = undoController.Undo(currentGrid, 8, currentPastGrids, currentPastGridsIndex)
-    print("newGrid:", newGrid)
+    undoController.Undo(currentGrid, 8, currentPastGrids, currentPastGridsIndex)
     #assert
-    assert newGrid == currentPastGrids[pastGridsQuantity - 1]
+    assert currentGrid == currentPastGrids[-1]
 
 if __name__ == "__main__":
   unittest.main()

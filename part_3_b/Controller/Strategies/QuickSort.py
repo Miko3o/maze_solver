@@ -73,7 +73,7 @@ class QuickSort(AbstractStrategy):
     #return leftwall
     return leftWall
 
-  def GetRandInt(low, high):
+  def GetRandInt(self, low, high):
     return randint(low, high)
 
 

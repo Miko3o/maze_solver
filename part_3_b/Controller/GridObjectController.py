@@ -43,29 +43,32 @@ class GridObjectController():
       self.goalExists = False
 
   def UnclickToSavePastGrids(self, pastGrids, currentGrid, currentPastGridsIndex):
+    #STEP 1: check if mouse is clicked
     if self.clicked == True:
-      rangeBetweenPastGridsIndexAndLength = len(pastGrids) - self.ConvertIndexToPositiveNumberHandler(pastGrids, currentPastGridsIndex)
+      #STEP 2: get the range of the end of the pastGrids array and the current Index
+      realIndex = self.ConvertIndexToPositiveNumberHandler(pastGrids, currentPastGridsIndex)
+      rangeBetweenPastGridsIndexAndLength = len(pastGrids) - realIndex
+      #STEP 3: append a copy of the current grid to the pastGrids array
       copyGrid = copy.deepcopy(currentGrid)
-      pastGrids.append(copyGrid)
-      
+      pastGrids.append(copyGrid)   
       print("rangeBetweenPastGridsIndexAndLength:", rangeBetweenPastGridsIndexAndLength)
-      print("pastGrids length:", len(pastGrids))
+      print("old pastGrids length:", len(pastGrids))
+      #STEP 4: if the current index is not at the end of the past array index, delete all the indecies ahead of it
       if rangeBetweenPastGridsIndexAndLength != 0:
         for i in range(rangeBetweenPastGridsIndexAndLength):
           pastGrids.pop()
           print("pop")
-      print("pastGrids length:", len(pastGrids))
+      print("new pastGrids length:", len(pastGrids))
       currentPastGridsIndex = -1
       print("pastGrids index:", currentPastGridsIndex)
-      print("realIndex:", currentPastGridsIndex % len(pastGrids))
-      print("rangeBetweenPastGridsIndexAndLength:", rangeBetweenPastGridsIndexAndLength)
+      print("realIndex:", realIndex)
     self.viewManager.modelManager.gridMetaData.ChangeGridData(self.currentGrid, False, pastGrids, currentPastGridsIndex)
 
   def ConvertIndexToPositiveNumberHandler(self, pastGrids, currentPastGridsIndex):
+    #example: if grid length is 5, index -1 becomes 4
     print("currentPastGridsIndex:", currentPastGridsIndex)
-    indexItem = pastGrids[currentPastGridsIndex]
-    print("pastGrids index:", pastGrids.index(indexItem) + 1)
-    return pastGrids.index(indexItem) + 1
+    realIndex = currentPastGridsIndex % len(pastGrids)
+    return realIndex + 1
 
 
 
