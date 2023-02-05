@@ -18,7 +18,12 @@ class MergeSort(AbstractStrategy):
     wallHeights = super().Sort(currentGrid)
 
     #this will be the main wall array that the UI will refrence
-    self.realSortedWalls = wallHeights
+    for i in range(len(wallHeights)):
+      indexToArray = []
+      indexToArray.append(wallHeights[i])
+      self.realSortedWalls.append(indexToArray)
+
+    print("real sorted walls:", self.realSortedWalls)
 
     #STEP 1 :enter the sort
     sortedWalls = self.MergeSort(wallHeights, currentGrid)
@@ -74,10 +79,10 @@ class MergeSort(AbstractStrategy):
     #STEP 1: compare the first index of the two arrays. whatever is smaller gets appended to the sorted array
     while firstHalf and secondHalf:
       if firstHalf[0] > secondHalf[0]:
-        sortedArray.append(secondHalf[0])  
+        sortedArray.append(secondHalf[0])
         secondHalf.pop(0)
       else:
-        sortedArray.append(firstHalf[0])  
+        sortedArray.append(firstHalf[0])
         firstHalf.pop(0)
       
       
@@ -94,91 +99,99 @@ class MergeSort(AbstractStrategy):
     
     #STEP 3: conditionals for organizing the sorted list that the UI will read
 
-    #
-    if len(self.realSortedWalls) == 2:
-      self.realSortedWalls[0] = sortedArray
-      self.realSortedWalls.pop(1)
+    #new way-------------------------------------------------
+
+    for i in range(len(self.realSortedWalls)):
+      print("hi")
+
+
+
+    #old way-------------------------------------------------
+
+    # if len(self.realSortedWalls) == 2:
+    #   self.realSortedWalls[0] = sortedArray
+    #   self.realSortedWalls.pop(1)
     
-    elif self.level == self.levelSaver and self.currentSortingIndex < len(self.realSortedWalls) - 1:
-      print(00000, "level:", self.level, self.levelSaver)
-      self.realSortedWalls[self.currentSortingIndex] = sortedArray
-      self.realSortedWalls.pop(self.currentSortingIndex + 1)
-      self.currentSortingIndex += 1
+    # elif self.level == self.levelSaver and self.currentSortingIndex < len(self.realSortedWalls) - 1:
+    #   print(00000, "level:", self.level, self.levelSaver)
+    #   self.realSortedWalls[self.currentSortingIndex] = sortedArray
+    #   self.realSortedWalls.pop(self.currentSortingIndex + 1)
+    #   self.currentSortingIndex += 1
 
     
       
-    elif self.level == self.levelSaver and self.currentSortingIndex >= len(self.realSortedWalls) - 1:
-      print(11111, "level:", self.level, self.levelSaver)
-      print("index:", self.currentSortingIndex)
-      self.realSortedWalls[self.currentSortingIndex] = sortedArray
-      self.currentSortingIndex += 1
+    # elif self.level == self.levelSaver and self.currentSortingIndex >= len(self.realSortedWalls) - 1:
+    #   print(11111, "level:", self.level, self.levelSaver)
+    #   print("index:", self.currentSortingIndex)
+    #   self.realSortedWalls[self.currentSortingIndex] = sortedArray
+    #   self.currentSortingIndex += 1
       
-    elif self.level == self.levelSaver + 1 and len(sortedArray) == 2:
-      print(2222, "level:", self.level, self.levelSaver)
-      print("goin under")
-      self.realSortedWalls[self.levelChangeStart - 1] = sortedArray
-      self.realSortedWalls.pop(self.levelChangeStart)
-      self.levelSaver = self.level
-      print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
+    # elif self.level == self.levelSaver + 1 and len(sortedArray) == 2:
+    #   print(2222, "level:", self.level, self.levelSaver)
+    #   print("goin under")
+    #   self.realSortedWalls[self.levelChangeStart - 1] = sortedArray
+    #   self.realSortedWalls.pop(self.levelChangeStart)
+    #   self.levelSaver = self.level
+    #   print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
 
-    elif self.level == self.levelSaver + 1 and len(sortedArray) == 3:
-      print(2222.5, "level:", self.level, self.levelSaver)
-      print("goin under")
-      self.realSortedWalls[self.levelChangeStart] = sortedArray
-      self.realSortedWalls.pop(self.levelChangeStart + 1)
-      self.levelSaver = self.level
-      print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
+    # elif self.level == self.levelSaver + 1 and len(sortedArray) == 3:
+    #   print(2222.5, "level:", self.level, self.levelSaver)
+    #   print("goin under")
+    #   self.realSortedWalls[self.levelChangeStart] = sortedArray
+    #   self.realSortedWalls.pop(self.levelChangeStart + 1)
+    #   self.levelSaver = self.level
+    #   print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
       
-    elif self.level == self.levelSaver - 1 and self.currentSortingIndex < len(self.realSortedWalls) - 1 and len(sortedArray) == 3:
-      print(33333.5, "level:", self.level, self.levelSaver)
-      self.realSortedWalls[self.levelChangeStart - 1] = sortedArray
-      self.realSortedWalls.pop(self.levelChangeStart)
-      self.levelSaver = self.level
-      self.levelChangeStart += 1
-      self.currentSortingIndex += 1
-      print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
+    # elif self.level == self.levelSaver - 1 and self.currentSortingIndex < len(self.realSortedWalls) - 1 and len(sortedArray) == 3:
+    #   print(33333.5, "level:", self.level, self.levelSaver)
+    #   self.realSortedWalls[self.levelChangeStart - 1] = sortedArray
+    #   self.realSortedWalls.pop(self.levelChangeStart)
+    #   self.levelSaver = self.level
+    #   self.levelChangeStart += 1
+    #   self.currentSortingIndex += 1
+    #   print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
 
-    elif self.level == self.levelSaver - 1 and self.currentSortingIndex < len(self.realSortedWalls) - 1 and len(sortedArray) % 2 == 0 and len(sortedArray) != len(self.realSortedWalls) - 1:
-      print(33333, "level:", self.level, self.levelSaver)
-      self.realSortedWalls[self.levelChangeStart - 1] = sortedArray
-      self.realSortedWalls.pop(self.levelChangeStart)
-      self.levelChangeStart += 1
+    # elif self.level == self.levelSaver - 1 and self.currentSortingIndex < len(self.realSortedWalls) - 1 and len(sortedArray) % 2 == 0 and len(sortedArray) != len(self.realSortedWalls) - 1:
+    #   print(33333, "level:", self.level, self.levelSaver)
+    #   self.realSortedWalls[self.levelChangeStart - 1] = sortedArray
+    #   self.realSortedWalls.pop(self.levelChangeStart)
+    #   self.levelChangeStart += 1
       
-      self.levelSaver = self.level
-      print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
+    #   self.levelSaver = self.level
+    #   print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
 
-    elif self.level == self.levelSaver - 1 and self.currentSortingIndex == len(self.realSortedWalls):
-      print(55555, "level:", self.level, self.levelSaver)
-      print("levelStartChanger:", self.levelChangeStart)
-      self.realSortedWalls[1] = sortedArray
-      self.currentSortingIndex = 0
-      self.currentSortingIndex += 1
-      self.realSortedWalls.pop(2)
-      self.levelSaver = self.level
-      self.levelChangeStart += 1
-      print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
+    # elif self.level == self.levelSaver - 1 and self.currentSortingIndex == len(self.realSortedWalls):
+    #   print(55555, "level:", self.level, self.levelSaver)
+    #   print("levelStartChanger:", self.levelChangeStart)
+    #   self.realSortedWalls[1] = sortedArray
+    #   self.currentSortingIndex = 0
+    #   self.currentSortingIndex += 1
+    #   self.realSortedWalls.pop(2)
+    #   self.levelSaver = self.level
+    #   self.levelChangeStart += 1
+    #   print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
 
-    elif self.level == self.levelSaver - 1 and len(sortedArray) == len(self.realSortedWalls) - 1 or self.level == self.levelSaver - 1 and len(sortedArray) == len(self.realSortedWalls) - 2:
-      print(55555.5, "level:", self.level, self.levelSaver)
-      print("levelStartChanger:", self.levelChangeStart)
-      self.realSortedWalls[0] = sortedArray
-      self.currentSortingIndex = 0
-      self.realSortedWalls.pop(1)
-      self.currentSortingIndex += 1
-      self.levelSaver = self.level
-      self.levelChangeStart = 1
-      print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
+    # elif self.level == self.levelSaver - 1 and len(sortedArray) == len(self.realSortedWalls) - 1 or self.level == self.levelSaver - 1 and len(sortedArray) == len(self.realSortedWalls) - 2:
+    #   print(55555.5, "level:", self.level, self.levelSaver)
+    #   print("levelStartChanger:", self.levelChangeStart)
+    #   self.realSortedWalls[0] = sortedArray
+    #   self.currentSortingIndex = 0
+    #   self.realSortedWalls.pop(1)
+    #   self.currentSortingIndex += 1
+    #   self.levelSaver = self.level
+    #   self.levelChangeStart = 1
+    #   print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
       
-    else:
-      print(44444, "level:", self.level, self.levelSaver)
-      print("levelStartChanger:", self.levelChangeStart)
-      self.realSortedWalls[self.levelChangeStart] = sortedArray
-      self.currentSortingIndex = 0
-      self.realSortedWalls.pop(self.levelChangeStart + 1)
-      self.currentSortingIndex += 1
-      self.levelSaver = self.level
-      self.levelChangeStart += 1
-      print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
+    # else:
+    #   print(44444, "level:", self.level, self.levelSaver)
+    #   print("levelStartChanger:", self.levelChangeStart)
+    #   self.realSortedWalls[self.levelChangeStart] = sortedArray
+    #   self.currentSortingIndex = 0
+    #   self.realSortedWalls.pop(self.levelChangeStart + 1)
+    #   self.currentSortingIndex += 1
+    #   self.levelSaver = self.level
+    #   self.levelChangeStart += 1
+    #   print("currentSortingIndex:", self.currentSortingIndex, "levelChangeStart:", self.levelChangeStart)
       
     
 
