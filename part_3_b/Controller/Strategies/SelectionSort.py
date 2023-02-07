@@ -23,6 +23,7 @@ class SelectionSort(AbstractStrategy):
       #STEP 3: swap the minimum with the first index
       self.SwapIndexes(currentGrid, wallHeights, i, minHeight, currentPastGrids, currentPastGridsIndex)
 
+      #clock
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
           pygame.quit()

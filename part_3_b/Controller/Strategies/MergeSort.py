@@ -102,7 +102,35 @@ class MergeSort(AbstractStrategy):
     #new way-------------------------------------------------
 
     for i in range(len(self.realSortedWalls)):
-      print("hi")
+      if len(self.realSortedWalls[i]) == len(sortedArray) - len(self.realSortedWalls[i]):
+        print("OPTION 1")
+        while self.realSortedWalls[i]:
+          self.realSortedWalls[i].pop()
+        for followingIndex in range(len(sortedArray)):
+          print("range of loop:", range(len(sortedArray)))
+          print("loop", followingIndex)
+          print("actual array in loop:", self.realSortedWalls)
+          if len(self.realSortedWalls[i + 1]) == 0:
+            break
+          self.realSortedWalls[i].append(sortedArray[followingIndex])
+        self.realSortedWalls.pop(i + 1)
+        break
+      elif len(self.realSortedWalls[i]) - 1 == len(sortedArray) - len(self.realSortedWalls[i]):
+        print("OPTION 2")
+        while self.realSortedWalls[i]:
+          self.realSortedWalls[i].pop()
+        for followingIndex in range(len(sortedArray)):
+          print("range of loop:", range(len(sortedArray)))
+          print("loop", followingIndex)
+          print("actual array in loop:", self.realSortedWalls)
+          if len(self.realSortedWalls[i + 1]) == 0:
+            break
+          self.realSortedWalls[i].append(sortedArray[followingIndex])
+        self.realSortedWalls.pop(i + 1)
+        break
+        
+    
+    print("LEVEL:", self.level)
 
 
 
@@ -235,7 +263,7 @@ class MergeSort(AbstractStrategy):
         pygame.quit()
         exit()
     pygame.display.update()
-    clock.tick(5)
+    clock.tick(160)
 
 
   def Gravity(self, currentGrid):
